@@ -35,7 +35,6 @@ public class InvView extends JFrame {
     public InvView() {
         setContentPane(ProductPanel);
         InitInv();
-
     }
 
     public void Alert(String Message) {

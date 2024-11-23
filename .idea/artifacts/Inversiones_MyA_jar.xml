@@ -5,6 +5,9 @@
       <element id="module-output" name="Inversiones_MyA" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/jsoup/jsoup/1.18.1/jsoup-1.18.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/json/json/20210307/json-20210307.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: com.microsoft.sqlserver:mssql-jdbc:9.2.1.jre8" />
+      <element id="library" level="project" name="Maven: org.json:json:20231013" />
+      <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.18.1" />
     </root>
   </artifact>
 </component>
