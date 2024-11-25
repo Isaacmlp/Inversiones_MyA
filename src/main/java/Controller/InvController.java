@@ -2,8 +2,8 @@ package Controller;
 import View.InvView;
 import Model.InvModel;
 
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.Locale;
 
 import static java.lang.Double.parseDouble;
@@ -23,7 +23,10 @@ public class InvController {
     public void ActionListener() {
         Inv.getGuardarButton().addActionListener(e -> Inv.Alert(invModel.GuardarProducto(Inv.getNombreProductoTxT().getText(),Inv.getDescripcionTXT().getText(),Inv.getCantidadTXT().getText(),Inv.getCostoProductoUSDTXT().getText(),Inv.getPrecioVentaUSDTXT().getText())));
 
-        Inv.getBuscarButton().addActionListener(e -> Inv.Alert("Btn Buscar funcionando"));
+        Inv.getBuscarButton().addActionListener(e -> invModel.FindProductByName(Inv.getModel(),Inv.getNombreProductoTxT().getText()));
+
+        Inv.getUpdateTablebtn().addActionListener(e -> invModel.GetProduct(Inv.getModel()));
+
     }
 
     public void ItemListener() {

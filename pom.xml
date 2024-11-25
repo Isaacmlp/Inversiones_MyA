@@ -53,7 +53,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.example.Inversiones_MyA.Main</mainClass> <!-- Reemplaza con la clase principal de tu aplicación -->
+                                    <mainClass>java.View.Main</mainClass> <!-- Reemplaza con la clase principal de tu aplicación -->
                                 </transformer>
                             </transformers>
                         </configuration>
