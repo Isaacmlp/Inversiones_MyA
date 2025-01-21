@@ -70,4 +70,23 @@ public class OpenView {
         stage.show();
     }
 
+    public void VerInventario() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.VerInventario));
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.VerInventarioCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void BuscarProducto() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.BuscarProducto));
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.BuscarProductoCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
 }

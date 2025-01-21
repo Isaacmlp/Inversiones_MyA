@@ -30,6 +30,7 @@ public class ModificarProductoModel {
                 Producto.add(resultSet.getString("Precio_Costo_BS"));
                 Producto.add(resultSet.getString("Precio_Venta_USD"));
                 Producto.add(resultSet.getString("Precio_Venta_BS"));
+                Producto.add(resultSet.getString("IDProducto"));
             }
             return Producto;
         } catch (RuntimeException | SQLException e) {
@@ -37,9 +38,9 @@ public class ModificarProductoModel {
         }
     }
 
-    public boolean ModificarProducto (String NombreProducto, String Descripcion, String Cantidad, String PrecioCostoUSD, String PrecioCostoBS, String PrecioVentaUSD, String PrecioVentaBS) {
+    public boolean ModificarProducto (String NombreProducto, String Descripcion, String Cantidad, String PrecioCostoUSD, String PrecioCostoBS, String PrecioVentaUSD, String PrecioVentaBS,String ID) {
         try (Connection connection = Conect.Conect();
-             PreparedStatement statement = connection.prepareStatement("UPDATE Inventario.Producto SET Nombre = ?, Descripcion = ?, Cantidad = ?, Precio_Costo_USD = ?, Precio_Costo_BS = ?, Precio_Venta_USD = ?, Precio_Venta_BS = ? WHERE Nombre = ?")
+             PreparedStatement statement = connection.prepareStatement("UPDATE Inventario.Producto SET Nombre = ?, Descripcion = ?, Cantidad = ?, Precio_Costo_USD = ?, Precio_Costo_BS = ?, Precio_Venta_USD = ?, Precio_Venta_BS = ? WHERE IDProducto = ?")
         ) {
             statement.setString(1,NombreProducto);
             statement.setString(2,Descripcion);
@@ -48,7 +49,7 @@ public class ModificarProductoModel {
             statement.setString(5,PrecioCostoBS);
             statement.setString(6,PrecioVentaUSD);
             statement.setString(7,PrecioVentaBS);
-            statement.setString(8,NombreProducto);
+            statement.setInt(8,Integer.parseInt(ID));
             statement.executeUpdate();
             return true;
         } catch (RuntimeException | SQLException e) {

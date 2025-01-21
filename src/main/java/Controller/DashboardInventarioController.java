@@ -23,5 +23,16 @@ public class DashboardInventarioController {
         Open.EliminarProducto();
     }
 
+    @FXML
+    void Ver(MouseEvent event) throws Exception {
+        Open.VerInventario();
+    }
+
+    @FXML
+    void Buscar(MouseEvent event) throws Exception {
+        Open.BuscarProducto();
+    }
+
+
 
 }

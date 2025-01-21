@@ -13,4 +13,8 @@ public class Paths {
     public static final String ModificarProductoCSS = "/Style/ModificarProducto.css";
     public static final String EliminarProducto = "/View/EliminarProducto.fxml";
     public static final String EliminarProductoCSS = "/Style/EliminarProducto.css";
+    public static final String VerInventario = "/View/VerInventario.fxml";
+    public static final String VerInventarioCSS = "/Style/VerInventario.css";
+    public static final String BuscarProducto = "/View/BuscarProducto.fxml";
+    public static final String BuscarProductoCSS = "/Style/BuscarProducto.css";
 }

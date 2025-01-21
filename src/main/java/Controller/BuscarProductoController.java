@@ -10,7 +10,8 @@ import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
 
-public class EliminarProductoController {
+public class BuscarProductoController {
+
     ModificarProductoModel Modify = new ModificarProductoModel();
     EliminarProductoModel Eliminar = new EliminarProductoModel();
 
@@ -68,39 +69,4 @@ public class EliminarProductoController {
             PrecioVentaUSDTXT.setText(Producto.get(5));
         }
     }
-
-    private void CleanFields() {
-        NombreProductoTXT.setText("");
-        DescripcionTXT.setText("");
-        CantidadTXT.setText("");
-        PrecioCostUSDTXT.setText("");
-        PrecioCostoBSTXT.setText("");
-        PrecioVentaBSTXT.setText("");
-        PrecioVentaUSDTXT.setText("");
-    }
-
-    private boolean IsEmptyFields() {
-        return (NombreProductoTXT.getText().isEmpty() || DescripcionTXT.getText().isEmpty() || CantidadTXT.getText().isEmpty() || PrecioCostUSDTXT.getText().isEmpty() || PrecioCostoBSTXT.getText().isEmpty() || PrecioVentaBSTXT.getText().isEmpty() || PrecioVentaUSDTXT.getText().isEmpty());    }
-
-    @FXML
-    void BtnGuardarCambios(ActionEvent event) {
-        if (IsEmptyFields()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Por favor, rellena todos los campos");
-            alert.showAndWait();
-            return;
-        }
-
-        if (Eliminar.EliminarProducto(NombreProductoTXT.getText())) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Producto Eliminado");
-            alert.setHeaderText(null);
-            alert.setContentText("Producto Eliminado Exitosamente");
-            alert.showAndWait();
-            CleanFields();
-        }
-    }
-
 }

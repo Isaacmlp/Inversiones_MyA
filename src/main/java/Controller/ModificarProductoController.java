@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class ModificarProductoController {
     ModificarProductoModel Modify = new ModificarProductoModel();
-
+    private String ID;
 
     @FXML
     private TextField BuscarTXT;
@@ -52,8 +52,9 @@ public class ModificarProductoController {
             CantidadTXT.setText(Producto.get(2));
             PrecioCostUSDTXT.setText(Producto.get(3));
             PrecioCostoBSTXT.setText(Producto.get(4));
-            PrecioVentaBSTXT.setText(Producto.get(5));
-            PrecioVentaUSDTXT.setText(Producto.get(6));
+            PrecioVentaBSTXT.setText(Producto.get(6));
+            PrecioVentaUSDTXT.setText(Producto.get(5));
+            ID = Producto.get(7);
         }
 
     }
@@ -69,7 +70,7 @@ public class ModificarProductoController {
             return;
         }
 
-        if (Modify.ModificarProducto(NombreProductoTXT.getText(),DescripcionTXT.getText(),CantidadTXT.getText(),PrecioCostUSDTXT.getText(),PrecioCostoBSTXT.getText(),PrecioVentaUSDTXT.getText(),PrecioVentaBSTXT.getText())) {
+        if (Modify.ModificarProducto(NombreProductoTXT.getText(),DescripcionTXT.getText(),CantidadTXT.getText(),PrecioCostUSDTXT.getText(),PrecioCostoBSTXT.getText(),PrecioVentaUSDTXT.getText(),PrecioVentaBSTXT.getText(),ID)) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Producto Modificado");
             alert.setHeaderText(null);
