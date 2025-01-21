@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="477.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddProductController" styleClass="container">
+   <children>
+      <Label layoutX="241.0" layoutY="14.0" text="Agregar Productos">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <VBox layoutX="65.0" layoutY="68.0">
+         <children>
+            <AnchorPane>
+               <children>
+                  <Pane layoutY="-3.0" prefHeight="383.0" prefWidth="529.0">
+                     <children>
+                        <Label fx:id="lblNombreProducto" layoutX="14.0" layoutY="14.0" text="Nombre Producto: " styleClass="label"/>
+                        <Label layoutX="14.0" layoutY="60.0" text="Descripción: " styleClass="label" />
+                        <Label layoutX="14.0" layoutY="108.0" text="Unidades: " styleClass="label" />
+                        <TextField fx:id="txtNombreProducto" layoutX="240.0"  layoutY="8.0" prefHeight="26.0" prefWidth="211.0" promptText="Nombre del Producto" styleClass="text-field" />
+                        <TextField fx:id="txtDescripcionProducto" layoutX="240.0"  layoutY="54.0" prefHeight="26.0" prefWidth="211.0" promptText="Descripción Producto" styleClass="text-field" />
+                        <TextField fx:id="txtUnidadesProducto" layoutX="240.0"  layoutY="104.0" prefHeight="26.0" prefWidth="211.0" promptText="Cantidades Producto" styleClass="text-field" />
+                        <Label layoutX="14.0" layoutY="166.0" text="Costo del Producto en USD" styleClass="label" />
+                        <TextField fx:id="TxtPrecioCostoUSD" layoutX="242.0" layoutY="162.0" prefHeight="26.0" prefWidth="211.0" promptText="Precio de Costo $" styleClass="text-field" />
+                        <Label layoutX="14.0" layoutY="221.0" text="Porcentaje Ganancia"  styleClass="label"/>
+                        <Label layoutX="14.0" layoutY="275.0" text="Precio de Venta en USD" styleClass="label" />
+                        <ComboBox fx:id="ComboPorcentaje" layoutX="241.0" layoutY="218.0" onAction="#CalcularPorcentaje" prefHeight="27.0" prefWidth="211.0" promptText="0%" />
+                        <TextField fx:id="txtPrecioVentaUSD" layoutX="242.0"  layoutY="272.0" prefHeight="26.0" prefWidth="211.0" promptText="Precio de Venta $" styleClass="text-field" />
+                        <ButtonBar layoutX="305.0" layoutY="329.0" prefHeight="40.0" prefWidth="200.0">
+                          <buttons>
+                            <Button alignment="TOP_RIGHT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#GuardarProducto" styleClass="btn" text="Guardar" />
+                          </buttons>
+                        </ButtonBar>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+   <effect>
+      <Blend />
+   </effect>
+</AnchorPane>

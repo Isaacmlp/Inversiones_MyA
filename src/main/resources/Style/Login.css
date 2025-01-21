@@ -1,0 +1,43 @@
+/* Estilo para quitar los bordes laterales y superiores, y solo mantener el borde inferior */
+
+Label {
+    -fx-text-fill: white;
+}
+
+TextField {
+     -fx-background-color: white; /* Fondo blanco */
+     -fx-border-color: transparent transparent #000000 transparent; /* Borde inferior negro */
+     -fx-border-width: 1 1 1 1; /* Ancho del borde: 0 en los lados, 1 en la parte inferior */
+     -fx-padding: 5 10;
+}
+
+AnchorPane {
+    -fx-background-image: url("../Img/LoginImage.jpg"); /* Imagen de fondo */
+    -fx-background-size: cover; /* Ajustar la imagen a la pantalla */
+    -fx-background-repeat: no-repeat; /* No repetir la imagen */
+    -fx-background-position: center;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 16px; /* Centrar la imagen */
+}
+
+.Image {
+    -fx-background-image: url("../Img/login-svgrepo-com.png"); /* Imagen de fondo */
+    -fx-background-size: cover; /* Ajustar la imagen a la pantalla */
+    -fx-background-repeat: no-repeat; /* No repetir la imagen */
+    -fx-background-position: center;
+}
+
+/* Estilo para el botón de inicio de sesión */
+Button {
+    -fx-font-family: "Roboto";
+    -fx-font-size: 16px;
+    -fx-background-color:  #0056b3;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px 20px;       
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0.0, 0, 0); /* Sombra */
+}
+Button:hover {
+    -fx-background-color: #0056b3;
+}
