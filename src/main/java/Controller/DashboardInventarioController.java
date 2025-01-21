@@ -19,8 +19,8 @@ public class DashboardInventarioController {
     }
 
     @FXML
-    void Eliminar(MouseEvent event) {
-
+    void Eliminar(MouseEvent event) throws Exception {
+        Open.EliminarProducto();
     }
 
 

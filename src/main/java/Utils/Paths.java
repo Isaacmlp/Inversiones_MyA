@@ -11,4 +11,6 @@ public class Paths {
     public static final String DashboardInventarioCSS = "/Style/DashboardInventario.css";
     public static final String ModificarProducto = "/View/ModificarProducto.fxml";
     public static final String ModificarProductoCSS = "/Style/ModificarProducto.css";
+    public static final String EliminarProducto = "/View/EliminarProducto.fxml";
+    public static final String EliminarProductoCSS = "/Style/EliminarProducto.css";
 }

@@ -60,5 +60,14 @@ public class OpenView {
         stage.show();
     }
 
+    public void EliminarProducto() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.EliminarProducto));
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.EliminarProductoCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }

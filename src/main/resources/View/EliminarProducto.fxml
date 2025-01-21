@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="509.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ModificarProductoController">
+<AnchorPane prefHeight="509.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EliminarProductoController">
    <children>
-      <Label layoutX="285.0" layoutY="23.0" text="Modificar Producto">
+      <Label layoutX="285.0" layoutY="23.0" text="Eliminar Producto">
          <font>
             <Font size="24.0" />
          </font>
@@ -58,10 +58,6 @@
                               <Insets left="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <TextField fx:id="NombreProductoTXT" prefHeight="26.0" prefWidth="106.0" GridPane.columnIndex="1" />
-                        <TextField fx:id="DescripcionTXT" prefHeight="26.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="CantidadTXT" prefHeight="26.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="PrecioCostUSDTXT" prefHeight="26.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Precio Costo Bs:" GridPane.columnIndex="2">
                            <GridPane.margin>
                               <Insets left="15.0" />
@@ -77,15 +73,19 @@
                               <Insets left="15.0" />
                            </GridPane.margin>
                         </Label>
-                        <TextField fx:id="PrecioCostoBSTXT" prefHeight="26.0" prefWidth="189.0" GridPane.columnIndex="3" />
-                        <TextField fx:id="PrecioVentaUSDTXT" prefHeight="26.0" prefWidth="106.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <TextField fx:id="PrecioVentaBSTXT" prefHeight="26.0" prefWidth="106.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <Label fx:id="NombreProductoTXT" GridPane.columnIndex="1" />
+                        <Label fx:id="DescripcionTXT" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="CantidadTXT" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="PrecioCostUSDTXT" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="PrecioCostoBSTXT" GridPane.columnIndex="3" />
+                        <Label fx:id="PrecioVentaUSDTXT" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Label fx:id="PrecioVentaBSTXT" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>
             </AnchorPane>
         </content>
       </TitledPane>
-      <Button layoutX="312.0" layoutY="432.0" mnemonicParsing="false" onAction="#BtnGuardarCambios" prefHeight="35.0" prefWidth="171.0" text="Guardar Cambios" />
+      <Button layoutX="277.0" layoutY="442.0" mnemonicParsing="false" onAction="#BtnGuardarCambios" prefHeight="35.0" prefWidth="221.0" text="Eliminar Producto" />
    </children>
 </AnchorPane>
