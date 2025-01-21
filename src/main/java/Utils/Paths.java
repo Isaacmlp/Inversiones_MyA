@@ -9,6 +9,6 @@ public class Paths {
     public static final String DashboardCSS = "/Style/Dashboard.css";
     public static final String DashboardInventario = "/View/DashboardInventario.fxml";
     public static final String DashboardInventarioCSS = "/Style/DashboardInventario.css";
-
-
+    public static final String ModificarProducto = "/View/ModificarProducto.fxml";
+    public static final String ModificarProductoCSS = "/Style/ModificarProducto.css";
 }

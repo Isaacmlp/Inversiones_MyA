@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="509.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ModificarProductoController">
+   <children>
+      <Label layoutX="285.0" layoutY="23.0" text="Modificar Producto">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="BuscarTXT" layoutX="136.0" layoutY="87.0" prefHeight="35.0" prefWidth="351.0" promptText="Escriba el nombre del Producto" />
+      <Button layoutX="550.0" layoutY="87.0" mnemonicParsing="false" onAction="#BtnBuscarProducto" prefHeight="35.0" prefWidth="171.0" text="Buscar Producto" />
+      <TitledPane animated="false" layoutX="66.0" layoutY="144.0" prefHeight="280.0" prefWidth="670.0" text="Datos del Producto">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <GridPane layoutX="-1.0" layoutY="20.0" prefHeight="208.0" prefWidth="640.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="195.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="142.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.0" minWidth="10.0" prefWidth="181.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="223.0" minWidth="10.0" prefWidth="152.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Nombre del Producto:">
+                           <GridPane.margin>
+                              <Insets left="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Descripcion:" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Cantidad:" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Precio Costo USD:" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="NombreProductoTXT" prefHeight="26.0" prefWidth="106.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="DescripcionTXT" prefHeight="26.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="CantidadTXT" prefHeight="26.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="PrecioCostUSDTXT" prefHeight="26.0" prefWidth="106.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Precio Costo Bs:" GridPane.columnIndex="2">
+                           <GridPane.margin>
+                              <Insets left="15.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Precio Venta USD:" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="15.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Precio Venta BS:" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="15.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="PrecioCostoBSTXT" prefHeight="26.0" prefWidth="189.0" GridPane.columnIndex="3" />
+                        <TextField fx:id="PrecioVentaUSDTXT" prefHeight="26.0" prefWidth="106.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <TextField fx:id="PrecioVentaBSTXT" prefHeight="26.0" prefWidth="106.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <Button layoutX="312.0" layoutY="432.0" mnemonicParsing="false" onAction="#BtnGuardarCambios" prefHeight="35.0" prefWidth="171.0" text="Guardar Cambios" />
+   </children>
+</AnchorPane>

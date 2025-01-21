@@ -13,4 +13,15 @@ public class DashboardInventarioController {
         Open.AddProduct();
     }
 
+    @FXML
+    void Modificar(MouseEvent event) throws Exception {
+        Open.ModificarProducto();
+    }
+
+    @FXML
+    void Eliminar(MouseEvent event) {
+
+    }
+
+
 }
