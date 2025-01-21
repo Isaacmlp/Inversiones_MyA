@@ -1,4 +1,7 @@
-package Utils;
+package Model;
+import Utils.ConectBD;
+import Utils.GetCurrency;
+
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
@@ -16,7 +19,7 @@ public class AddProductModel {
         double PrecioCostoUSD = parseDouble(PrecioDeCostoUSD);
         double PrecioVentaUSd = parseDouble(PrecioVentaUSD);
 
-        String SQL = "INSERT INTO Producto(Nombre, Descripcion, Cantidad, Precio_Costo_USD,Precio_Costo_BS ,Precio_Venta_USD, Precio_Venta_BS) VALUES (?,?,?,?,?,?,?)";
+        String SQL = "INSERT INTO Inventario.Producto VALUES (?,?,?,?,?,?,?)";
         try (Connection connection = con.Conect();
              PreparedStatement statement = connection.prepareStatement(SQL)) {
 

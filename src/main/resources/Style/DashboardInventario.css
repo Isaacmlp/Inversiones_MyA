@@ -10,28 +10,12 @@
     -fx-font-size: 14px;
 }
 
-.titulo {
-    -fx-font-family: "Arial";
-    -fx-font-size: 40px;
-    -fx-font-weight: bold;
-}
-
-.subTitulo {
-    -fx-font-family: "Arial";
-    -fx-font-size: 26px;
-    -fx-font-weight: bold;
-}
-
 .footer {
     -fx-font-family: 'Alice';
     -fx-font-size: 12px;
 }
 
-Label {
-    -fx-text-fill: black;
-    -fx-font-family: 'Alice';
-    -fx-font-size: 16px;
-}
+
 
 TextField {
      -fx-background-color: white; /* Fondo blanco */
@@ -40,8 +24,8 @@ TextField {
      -fx-padding: 5 10;
 }
 
-AnchorPane {
-    -fx-background-image: url("/Img/Fondo.jpg"); /* Imagen de fondo */
+.AnchorPane {
+    -fx-background-image: url("../Img/DashBoardBackground.png"); /* Imagen de fondo */
     -fx-background-size: cover; /* Ajustar la imagen a la pantalla */
     -fx-background-repeat: no-repeat; /* No repetir la imagen */
     -fx-background-position: center;
@@ -50,27 +34,12 @@ AnchorPane {
 }
 
 .Image {
-    -fx-background-image: url("../Img/login-svgrepo-com.png"); /* Imagen de fondo */
+    -fx-background-image: url("../Img/DashBoardBackground.png"); /* Imagen de fondo */
     -fx-background-size: cover; /* Ajustar la imagen a la pantalla */
     -fx-background-repeat: no-repeat; /* No repetir la imagen */
     -fx-background-position: center;
 }
 
-
-/* Estilo para las celdas de la tabla */
-.table-cell {
-    -fx-font-size: 14px; /* Tamaño de la letra */
-    -fx-font-family: "Arial"; /* Fuente */
-    -fx-text-fill: #333333; /* Color del texto */
-}
-
-/* Estilo para las cabeceras de las columnas */
-.table-column {
-    -fx-font-size: 16px; /* Tamaño de la letra */
-    -fx-font-family: "Arial"; /* Fuente */
-    -fx-text-fill: #000000; /* Color del texto */
-    -fx-font-weight: bold; /* Negrita */
-}
 /* Estilo para el botón de inicio de sesión */
 Button {
     -fx-font-family: "Alice";

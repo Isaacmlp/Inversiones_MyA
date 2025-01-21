@@ -1,6 +1,6 @@
 package Controller;
 
-import Utils.AddProductModel;
+import Model.AddProductModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -52,11 +52,6 @@ public class AddProductController {
             String PrecioDeCostoUSD = TxtPrecioCostoUSD.getText();
             String PrecioVentaUSD = txtPrecioVentaUSD.getText();
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Guardando Producto");
-            alert.setHeaderText(null);
-            alert.setContentText("Guardando Producto");
-            alert.showAndWait();
 
             String Message = addProductModel.GuardarProducto(NombreProducto,Descripcion,Cantidad,PrecioDeCostoUSD,PrecioVentaUSD);
 
@@ -65,6 +60,15 @@ public class AddProductController {
             alert2.setHeaderText(null);
             alert2.setContentText(Message);
             alert2.showAndWait();
+            CleanFields();
+    }
+
+    private void CleanFields() {
+        txtNombreProducto.setText("");
+        txtDescripcionProducto.setText("");
+        txtUnidadesProducto.setText("");
+        TxtPrecioCostoUSD.setText("");
+        txtPrecioVentaUSD.setText("");
     }
 
     @FXML

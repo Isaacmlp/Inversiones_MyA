@@ -10,32 +10,42 @@ import java.util.Objects;
 public class OpenView {
 
     public void Login() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.PathLogin));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.Login));
         AnchorPane pane = loader.load();
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.PathLoginCSS)).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.LoginCSS)).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
 
     public void Dashboard() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.PathDashboard));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.Dashboard));
         AnchorPane pane = loader.load();
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.PathDashboardCSS)).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DashboardCSS)).toExternalForm());
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
     }
 
     public void AddProduct() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.PathAddProduct));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.AddProduct));
         AnchorPane pane = loader.load();
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.PathProductsCSS)).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.ProductsCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void DashboardInventario() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.DashboardInventario));
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DashboardInventarioCSS)).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
