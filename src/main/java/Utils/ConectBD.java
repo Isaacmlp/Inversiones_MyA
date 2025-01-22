@@ -1,14 +1,17 @@
 package Utils;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import javafx.scene.control.Alert;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConectBD {
-    private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=InversionesMyA";
-    private static final String User = "sa";
-    private static final String Password = "154296387";
+    static Dotenv dotenv = Dotenv.load();
+
+    private static final String URL = dotenv.get("DB_URL");
+    private static final String User = dotenv.get("DB_USER");
+    private static final String Password = dotenv.get("DB_PASSWORD");
 
     public Connection Conect() {
         Connection connection;
