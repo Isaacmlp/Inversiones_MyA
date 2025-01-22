@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="564.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Inventario.VerInventarioController">
+   <children>
+      <Label layoutX="366.0" layoutY="20.0" text="Inventario">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <TableView fx:id="TablaInventario" layoutX="73.0" layoutY="132.0" prefHeight="301.0" prefWidth="746.0">
+        <columns>
+          <TableColumn fx:id="NombreProductoColumn" prefWidth="197.0" text="Nombre del Producto" />
+          <TableColumn fx:id="DescripcionColumn" minWidth="7.0" prefWidth="127.0" text="Descripcion" />
+            <TableColumn fx:id="CantidadColumn" minWidth="7.0" prefWidth="103.0" text="Cantidad" />
+            <TableColumn fx:id="PrecioVentaUSDColumn" minWidth="7.0" prefWidth="156.0" text="Precio de Venta USD" />
+            <TableColumn fx:id="PrecioVentaBsColumn" minWidth="7.0" prefWidth="162.0" text="Precio de Venta BS" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
