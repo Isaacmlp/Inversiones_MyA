@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="454.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DolarController">
+   <children>
+      <Label layoutX="303.0" layoutY="14.0" text="Dolar">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <TitledPane animated="false" layoutX="245.0" layoutY="100.0" text="Tasa Actual">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="66.0" text="Dolar BCV:" />
+                  <Label fx:id="TasaTXT" layoutX="100.0" layoutY="67.0" text="Tasa Actual" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+   </children>
+</AnchorPane>

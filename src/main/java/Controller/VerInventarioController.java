@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.DolarModel;
 import Model.Producto;
 import Model.VerInventarioModel;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.scene.control.TableView;
 
 public class VerInventarioController {
     VerInventarioModel VerInventario = new VerInventarioModel();
+    DolarModel Dolar = new DolarModel();
 
     @FXML
     private TableColumn<Producto, String> CantidadColumn;
@@ -29,6 +31,7 @@ public class VerInventarioController {
 
     @FXML
     void initialize() {
+        Dolar.ActualizarDolar();
         VerInventario.cargarInventarioTabla(NombreProductoColumn,DescripcionColumn,CantidadColumn,PrecioVentaUSDColumn,PrecioVentaBsColumn,TablaInventario);
     }
 

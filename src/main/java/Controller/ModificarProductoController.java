@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.ModificarProductoModel;
+import Utils.GetCurrency;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

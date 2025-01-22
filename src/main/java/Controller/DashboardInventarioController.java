@@ -33,6 +33,11 @@ public class DashboardInventarioController {
         Open.BuscarProducto();
     }
 
+    @FXML
+    void TasaDolar(MouseEvent event) throws Exception {
+        Open.Dolar();
+    }
+
 
 
 }

@@ -1,5 +1,6 @@
 package Model;
 import Utils.ConectBD;
+import Utils.GetCurrency;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 public class ModificarProductoModel {
 
     ConectBD Conect = new ConectBD();
+    GetCurrency Price = new GetCurrency();
 
     public ArrayList<String> BuscarProducto (String NombreProducto) {
         ArrayList<String> Producto = new ArrayList<>();
@@ -39,6 +41,9 @@ public class ModificarProductoModel {
     }
 
     public boolean ModificarProducto (String NombreProducto, String Descripcion, String Cantidad, String PrecioCostoUSD, String PrecioCostoBS, String PrecioVentaUSD, String PrecioVentaBS,String ID) {
+            PrecioCostoBS = String.valueOf(Double.parseDouble(PrecioCostoUSD) * Price.getCurrency().bcv());
+            PrecioVentaBS = String.valueOf(Double.parseDouble(PrecioVentaUSD) * Price.getCurrency().bcv());
+
         try (Connection connection = Conect.Conect();
              PreparedStatement statement = connection.prepareStatement("UPDATE Inventario.Producto SET Nombre = ?, Descripcion = ?, Cantidad = ?, Precio_Costo_USD = ?, Precio_Costo_BS = ?, Precio_Venta_USD = ?, Precio_Venta_BS = ? WHERE IDProducto = ?")
         ) {

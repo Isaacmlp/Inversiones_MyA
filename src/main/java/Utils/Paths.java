@@ -17,4 +17,6 @@ public class Paths {
     public static final String VerInventarioCSS = "/Style/VerInventario.css";
     public static final String BuscarProducto = "/View/BuscarProducto.fxml";
     public static final String BuscarProductoCSS = "/Style/BuscarProducto.css";
+    public static final String Dolar = "/View/Dolar.fxml";
+    public static final String DolarCSS = "/Style/Dolar.css";
 }

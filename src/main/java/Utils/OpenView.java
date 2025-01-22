@@ -89,4 +89,14 @@ public class OpenView {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void Dolar() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.Dolar));
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DolarCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
 }
