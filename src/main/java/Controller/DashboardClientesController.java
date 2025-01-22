@@ -1,13 +1,16 @@
 package Controller;
 
+import Utils.OpenView;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 
 public class DashboardClientesController {
+    OpenView open = new OpenView();
+
 
     @FXML
-    void AgregarCliente(MouseEvent event) {
-
+    void AgregarCliente(MouseEvent event) throws Exception {
+        open.AgregarClientes();
     }
 
     @FXML

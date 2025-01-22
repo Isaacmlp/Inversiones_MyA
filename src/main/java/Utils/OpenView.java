@@ -138,7 +138,16 @@ public class OpenView {
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DashboardClientesCSS)).toExternalForm());
         stage.setScene(scene);
         stage.show();
-    }   
+    }
 
+    public void AgregarClientes() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.AgregarClientes));
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.AgregarClientesCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }
