@@ -19,4 +19,14 @@ public class Paths {
     public static final String BuscarProductoCSS = "/Style/BuscarProducto.css";
     public static final String Dolar = "/View/Dolar.fxml";
     public static final String DolarCSS = "/Style/Dolar.css";
+    public static final String DashboardMonedas = "/View/DashboardMonedas.fxml";
+    public static final String DashboardMonedasCSS = "/Style/Monedas.css";
+    public static final String DashboardFacturar = "/View/DasboardFacturar.fxml";
+    public static final String DashboardFacturarCSS = "/Style/Facturar.css";
+    public static final String DashboardFacturas = "/View/DashboardFacturas.fxml";
+    public static final String DashboardFacturasCSS = "/Style/Facturas.css";
+    public static final String DashboardClientes = "/View/DashboardClientes.fxml";
+    public static final String DashboardClientesCSS = "/Style/DashboardClientes.css";
+
+
 }

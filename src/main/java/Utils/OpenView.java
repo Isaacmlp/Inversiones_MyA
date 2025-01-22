@@ -99,4 +99,46 @@ public class OpenView {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void DashboardMonedas() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.DashboardMonedas));
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DashboardMonedasCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void DashboardFacturar() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.DashboardFacturar));
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DashboardFacturarCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void DashboardFacturas() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.DashboardFacturas));
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DashboardFacturasCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void DashboardClientes() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.DashboardClientes));
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DashboardClientesCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }   
+
+
 }

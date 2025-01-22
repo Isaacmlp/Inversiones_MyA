@@ -13,22 +13,22 @@ public class DashboardController {
     }
 
     @FXML
-    void Clientes(MouseEvent event) {
-
+    void Clientes(MouseEvent event) throws Exception {
+        Open.DashboardClientes();
     }
 
     @FXML
-    void Facturar(MouseEvent event) {
-
+    void Facturar(MouseEvent event) throws Exception {
+        Open.DashboardFacturar();
     }
 
     @FXML
-    void Facturas(MouseEvent event) {
-
+    void Facturas(MouseEvent event) throws Exception {
+        Open.DashboardFacturas();
     }
 
     @FXML
-    void Monedas(MouseEvent event) {
-
+    void Monedas(MouseEvent event) throws Exception {
+        Open.DashboardMonedas();
     }
 }
