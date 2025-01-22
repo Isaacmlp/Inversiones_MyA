@@ -12,4 +12,23 @@ public class DashboardController {
         Open.DashboardInventario();
     }
 
+    @FXML
+    void Clientes(MouseEvent event) {
+
+    }
+
+    @FXML
+    void Facturar(MouseEvent event) {
+
+    }
+
+    @FXML
+    void Facturas(MouseEvent event) {
+
+    }
+
+    @FXML
+    void Monedas(MouseEvent event) {
+
+    }
 }

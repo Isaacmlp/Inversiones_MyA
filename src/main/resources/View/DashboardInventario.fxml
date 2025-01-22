@@ -78,7 +78,7 @@
                         </ImageView>
                         <ImageView fitHeight="55.0" fitWidth="115.0" onMouseClicked="#Buscar" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <image>
-                              <Image url="@../Img/inventario%20(2).png" />
+                              <Image url="@../Img/buscar.png" />
                            </image>
                            <GridPane.margin>
                               <Insets left="35.0" />

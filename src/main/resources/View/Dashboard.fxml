@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="1380.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
    <children>
-      <TitledPane animated="false" layoutX="14.0" layoutY="14.0" prefHeight="662.0" prefWidth="248.0" text="Menu">
+      <TitledPane animated="false" layoutX="14.0" layoutY="14.0" prefHeight="589.0" prefWidth="248.0" text="Menu Principal">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -74,6 +74,46 @@
                               <Insets left="10.0" />
                            </padding>
                         </Label>
+                        <Label text="Monedas" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
+                        </Label>
+                        <ImageView fitHeight="51.0" fitWidth="54.0" onMouseClicked="#Clientes" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../Img/cliente-satisfecho.png" />
+                           </image>
+                           <GridPane.margin>
+                              <Insets left="35.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                        <ImageView fitHeight="51.0" fitWidth="54.0" onMouseClicked="#Facturar" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../Img/Facturar.png" />
+                           </image>
+                           <GridPane.margin>
+                              <Insets left="35.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                        <ImageView fitHeight="51.0" fitWidth="54.0" onMouseClicked="#Facturas" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@../Img/facturas.png" />
+                           </image>
+                           <GridPane.margin>
+                              <Insets left="35.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                        <ImageView fitHeight="51.0" fitWidth="54.0" onMouseClicked="#Monedas" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <image>
+                              <Image url="@../Img/Moneda.png" />
+                           </image>
+                           <GridPane.margin>
+                              <Insets left="35.0" />
+                           </GridPane.margin>
+                        </ImageView>
                      </children>
                   </GridPane>
                </children></AnchorPane>
