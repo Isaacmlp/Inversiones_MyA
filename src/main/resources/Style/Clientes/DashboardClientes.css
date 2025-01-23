@@ -25,7 +25,7 @@ TextField {
 }
 
 .AnchorPane {
-    -fx-background-image: url("../Img/DashBoardBackground.png"); /* Imagen de fondo */
+    -fx-background-image: url("/Img/DashBoardBackground.png"); /* Imagen de fondo */
     -fx-background-size: cover; /* Ajustar la imagen a la pantalla */
     -fx-background-repeat: no-repeat; /* No repetir la imagen */
     -fx-background-position: center;
@@ -34,7 +34,7 @@ TextField {
 }
 
 .Image {
-    -fx-background-image: url("../Img/DashBoardBackground.png"); /* Imagen de fondo */
+    -fx-background-image: url("/Img/DashBoardBackground.png"); /* Imagen de fondo */
     -fx-background-size: cover; /* Ajustar la imagen a la pantalla */
     -fx-background-repeat: no-repeat; /* No repetir la imagen */
     -fx-background-position: center;
