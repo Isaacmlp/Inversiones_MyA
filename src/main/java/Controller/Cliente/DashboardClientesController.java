@@ -14,8 +14,8 @@ public class DashboardClientesController {
     }
 
     @FXML
-    void BuscarCliente(MouseEvent event) {
-
+    void BuscarCliente(MouseEvent event) throws Exception {
+        Open.BuscarClientes();
     }
 
     @FXML
