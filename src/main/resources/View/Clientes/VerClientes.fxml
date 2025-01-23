@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="564.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Cliente.VerClientesController">
+    <children>
+        <Label layoutX="366.0" layoutY="20.0" text="Clientes">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Label>
+        <TableView fx:id="TablaClientes" layoutX="107.0" layoutY="132.0" prefHeight="301.0" prefWidth="679.0">
+            <columns>
+                <TableColumn fx:id="NombreClienteColumn" prefWidth="111.0" text="Nombre" />
+                <TableColumn fx:id="ApellidoClienteColumn" minWidth="7.0" prefWidth="90.0" text="Apellido" />
+                <TableColumn fx:id="CedulaClienteColumn" minWidth="7.0" prefWidth="90.0" text="Cedula" />
+                <TableColumn fx:id="TelefonoClienteColumn" minWidth="7.0" prefWidth="93.0" text="Telefono" />
+                <TableColumn fx:id="DireccionClienteColumn" minWidth="7.0" prefWidth="113.0" text="Dirección" />
+            <TableColumn fx:id="CorreoClienteColumn1" minWidth="7.0" prefWidth="181.0" text="Correo Electronico" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
