@@ -2,7 +2,6 @@ package Controller.Cliente;
 
 import Model.Cliente.EliminarClienteModel;
 import Model.Cliente.ModificarClienteModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;

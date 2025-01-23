@@ -1,8 +1,4 @@
 /* Estilo para quitar los bordes laterales y superiores, y solo mantener el borde inferior */
-@font-face {
-    font-family: 'Alice';
-    src: url('../fonts/Alice-Regular.ttf');
-}
 
 /* Aplicar la fuente Alice a todos los elementos */
 .root {

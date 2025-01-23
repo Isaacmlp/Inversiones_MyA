@@ -28,8 +28,8 @@ public class DashboardClientesController {
     }
 
     @FXML
-    void VerCliente() {
-
+    void VerCliente() throws Exception {
+        Open.VerClientes();
     }
 
 }
