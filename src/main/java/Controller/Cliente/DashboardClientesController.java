@@ -5,12 +5,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 
 public class DashboardClientesController {
-    OpenView open = new OpenView();
+    OpenView Open = new OpenView();
 
 
     @FXML
     void AgregarCliente(MouseEvent event) throws Exception {
-        open.AgregarClientes();
+        Open.AgregarClientes();
     }
 
     @FXML
@@ -24,8 +24,8 @@ public class DashboardClientesController {
     }
 
     @FXML
-    void ModificarCliente(MouseEvent event) {
-
+    void ModificarCliente(MouseEvent event) throws Exception {
+        Open.ModificarClientes();
     }
 
     @FXML

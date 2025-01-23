@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?> <!-- Importación faltante -->
 
-<AnchorPane prefHeight="644.0" prefWidth="921.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Cliente.ModificarClienteController">
+<AnchorPane prefHeight="644.0" prefWidth="921.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Cliente.BuscarClienteCotroller">
 
     <children>
         <Label layoutX="325.0" layoutY="24.0" text="Modificar Cliente">

@@ -2,6 +2,8 @@ package Utils;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -19,7 +21,9 @@ public class OpenView {
         stage.show();
     }
 
-    public void Dashboard() throws Exception {
+    public void Dashboard(TextField btn) throws Exception {
+        btn.getScene().getWindow().getOnCloseRequest();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.Dashboard));
         AnchorPane pane = loader.load();
         Scene scene = new Scene(pane);
@@ -146,6 +150,16 @@ public class OpenView {
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.AgregarClientesCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void ModificarClientes() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.ModificarClientes));
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.ModificarClientesCSS)).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

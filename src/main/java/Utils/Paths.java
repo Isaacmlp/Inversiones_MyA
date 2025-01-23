@@ -29,6 +29,9 @@ public class Paths {
     public static final String DashboardClientesCSS = "/Style/Clientes/DashboardClientes.css";
     public static final String AgregarClientes = "/View/Clientes/AgregarCliente.fxml";
     public static final String AgregarClientesCSS = "/Style/Clientes/AgregarCliente.css";
+    public static final String ModificarClientes = "/View/Clientes/ModificarCliente.fxml";
+    public static final String ModificarClientesCSS = "/Style/Clientes/ModificarCliente.css";
+
 
 
 

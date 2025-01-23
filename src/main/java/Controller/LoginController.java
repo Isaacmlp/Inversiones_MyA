@@ -37,14 +37,14 @@ public class LoginController {
                 alert.setHeaderText(null);
                 alert.setContentText("Bienvenido de Nuevo, " + usuario + " [Administrador]");
                 alert.showAndWait();
-                Open.Dashboard();
+                Open.Dashboard(Userlbl);
             } else if (Auth.tieneRol(Auth.GetID(usuario), "Supervisor")) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Login exitoso");
                 alert.setHeaderText(null);
                 alert.setContentText("Bienvenido de Nuevo, " + usuario + " [Supervisor]");
                 alert.showAndWait();
-                Open.Dashboard();
+                Open.Dashboard(Userlbl);
 
             } else if (Auth.tieneRol(Auth.GetID(usuario), "Empleado")) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -52,7 +52,7 @@ public class LoginController {
                 alert.setHeaderText(null);
                 alert.setContentText("Bienvenido de Nuevo, " + usuario + " [Empleado]");
                 alert.showAndWait();
-                Open.Dashboard();
+                Open.Dashboard(Userlbl);
 
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -60,7 +60,7 @@ public class LoginController {
                 alert.setHeaderText(null);
                 alert.setContentText("Bienvenido de Nuevo, " + usuario + " [Indefinido]");
                 alert.showAndWait();
-                Open.Dashboard();
+                Open.Dashboard(Userlbl);
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
