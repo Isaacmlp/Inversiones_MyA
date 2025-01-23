@@ -15,11 +15,11 @@ import java.util.Objects;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.Login));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.DashboardFacturar));
         AnchorPane pane = loader.load();
         Scene scene = new Scene(pane);
 
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.LoginCSS)).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DashboardFacturarCSS)).toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
