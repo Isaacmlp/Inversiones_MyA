@@ -164,4 +164,24 @@ public class OpenView {
         stage.show();
     }
 
+    public void BuscarClientes() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.BuscarClientes));
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.BuscarClientesCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void EliminarClientes() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.EliminarClientes));
+        AnchorPane pane = loader.load();
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.EliminarClientesCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }

@@ -31,6 +31,10 @@ public class Paths {
     public static final String AgregarClientesCSS = "/Style/Clientes/AgregarCliente.css";
     public static final String ModificarClientes = "/View/Clientes/ModificarCliente.fxml";
     public static final String ModificarClientesCSS = "/Style/Clientes/ModificarCliente.css";
+    public static final String BuscarClientes = "/View/Clientes/BuscarCliente.fxml";
+    public static final String BuscarClientesCSS = "/Style/Clientes/BuscarCliente.css";
+    public static final String EliminarClientes = "/View/Clientes/EliminarCliente.fxml";
+    public static final String EliminarClientesCSS = "/Style/Clientes/EliminarCliente.css";
 
 
 

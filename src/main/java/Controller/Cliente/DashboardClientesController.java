@@ -1,7 +1,6 @@
 package Controller.Cliente;
 
 import Utils.OpenView;
-import javafx.scene.input.MouseEvent;
 import javafx.fxml.FXML;
 
 public class DashboardClientesController {
@@ -9,27 +8,27 @@ public class DashboardClientesController {
 
 
     @FXML
-    void AgregarCliente(MouseEvent event) throws Exception {
+    void AgregarCliente() throws Exception {
         Open.AgregarClientes();
     }
 
     @FXML
-    void BuscarCliente(MouseEvent event) throws Exception {
+    void BuscarCliente() throws Exception {
         Open.BuscarClientes();
     }
 
     @FXML
-    void EliminarCliente(MouseEvent event) {
-
+    void EliminarCliente() throws Exception {
+        Open.EliminarClientes();
     }
 
     @FXML
-    void ModificarCliente(MouseEvent event) throws Exception {
+    void ModificarCliente() throws Exception {
         Open.ModificarClientes();
     }
 
     @FXML
-    void VerCliente(MouseEvent event) {
+    void VerCliente() {
 
     }
 
