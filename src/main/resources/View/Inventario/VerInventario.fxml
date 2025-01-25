@@ -14,7 +14,7 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <TableView fx:id="TablaInventario" layoutX="268.0" layoutY="195.0" prefHeight="321.0" prefWidth="971.0">
+      <TableView fx:id="TablaInventario" layoutX="215.0" layoutY="194.0" prefHeight="321.0" prefWidth="971.0">
         <columns>
           <TableColumn fx:id="NombreProductoColumn" prefWidth="220.0" text="Nombre del Producto" />
           <TableColumn fx:id="DescripcionColumn" minWidth="7.0" prefWidth="213.0" text="Descripcion" />
