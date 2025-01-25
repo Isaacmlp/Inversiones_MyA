@@ -47,11 +47,6 @@
                               <Insets left="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label text="Buscar Producto:" GridPane.rowIndex="3">
-                           <GridPane.margin>
-                              <Insets left="5.0" />
-                           </GridPane.margin>
-                        </Label>
                         <ImageView fitHeight="58.0" fitWidth="90.0" onMouseClicked="#AgregarProducto" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                            <image>
                               <Image url="@../../Img/agregar-producto.png" />
@@ -76,33 +71,25 @@
                               <Insets left="35.0" />
                            </GridPane.margin>
                         </ImageView>
-                        <ImageView fitHeight="55.0" fitWidth="115.0" onMouseClicked="#Buscar" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Label text="Ver Inventario:" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets left="5.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <ImageView fitHeight="55.0" fitWidth="115.0" onMouseClicked="#Ver" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <image>
-                              <Image url="@../../Img/buscar.png" />
+                              <Image url="@../../Img/inventario%20(2).png" />
                            </image>
                            <GridPane.margin>
                               <Insets left="35.0" />
                            </GridPane.margin>
                         </ImageView>
-                        <Label text="Ver Inventario:" GridPane.rowIndex="4">
+                        <Label text="Tasa Dolar:" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets left="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <ImageView fitHeight="55.0" fitWidth="115.0" onMouseClicked="#Ver" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <image>
-                              <Image url="@../Img/inventario%20(2).png" />
-                           </image>
-                           <GridPane.margin>
-                              <Insets left="35.0" />
-                           </GridPane.margin>
-                        </ImageView>
-                        <Label text="Tasa Dolar:" GridPane.rowIndex="5">
-                           <GridPane.margin>
-                              <Insets left="5.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <ImageView fitHeight="55.0" fitWidth="115.0" onMouseClicked="#TasaDolar" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <ImageView fitHeight="55.0" fitWidth="115.0" onMouseClicked="#TasaDolar" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <image>
                               <Image url="@../../Img/simbolo-de-dolar.png" />
                            </image>

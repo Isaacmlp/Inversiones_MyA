@@ -1,5 +1,6 @@
 package Model.Inventario;
 
+import Model.Inventario.Producto;
 import Utils.ConectBD;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,8 +30,40 @@ public class VerInventarioModel {
         CargarInventario(TablaInventario);
     }
 
+    public void cargarInventarioTabla(TableColumn<Producto, String> NombreProducto, TableColumn<Producto, String> Descripcion, TableColumn<Producto, String> Cantidad, TableColumn<Producto, String> PrecioVentaUSD, TableColumn<Producto, String> PrecioVentaBS, TableView<Producto> TablaInventario, String BuscarProductoTXT) {
+        // Configurar las columnas
+        NombreProducto.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
+        Descripcion.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
+        Cantidad.setCellValueFactory(new PropertyValueFactory<>("Cantidad"));
+        PrecioVentaUSD.setCellValueFactory(new PropertyValueFactory<>("PrecioVentaUSD"));
+        PrecioVentaBS.setCellValueFactory(new PropertyValueFactory<>("PrecioVentaBS"));
+
+        // Cargar los datos del vehículo
+        CargarInventario(TablaInventario, BuscarProductoTXT);
+    }
     public void CargarInventario(TableView<Producto> TablaInventario) {
         ArrayList<String> Product = BuscarProducto();
+        ObservableList<Producto> datos = FXCollections.observableArrayList();
+
+        for (int i = 0 ; i < Product.size(); i += 7) {
+
+            Producto producto = new Producto(
+                    Product.get(i), // Nombre
+                    Product.get(i + 1),     // Descripcion
+                    Product.get(i + 2),     // Cantidad
+                    Product.get(i + 3),     // Precio de Costo USD
+                    Product.get(i + 4),     // Precio de Costo BS
+                    Product.get(i + 5),     // Precio de Venta USD
+                    Product.get(i + 6)   // Precio de Venta BS
+            );
+            datos.add(producto);
+        }
+
+        TablaInventario.setItems(datos);
+    }
+
+    public void CargarInventario(TableView<Producto> TablaInventario, String BuscarProductoTXT) {
+        ArrayList<String> Product = BuscarProducto(BuscarProductoTXT);
         ObservableList<Producto> datos = FXCollections.observableArrayList();
 
         for (int i = 0 ; i < Product.size(); i += 7) {
@@ -77,6 +110,29 @@ public class VerInventarioModel {
         }
     }
 
+    public ArrayList<String> BuscarProducto (String BuscarProductoTXT) {
+        ArrayList<String> Producto = new ArrayList<>();
+
+        try (Connection connection = Conect.Conect();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Inventario.Producto WHERE Nombre LIKE ?")
+        ) {
+            statement.setString(1, BuscarProductoTXT + "%");
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Producto.add(resultSet.getString("Nombre"));
+                Producto.add(resultSet.getString("Descripcion"));
+                Producto.add(resultSet.getString("Cantidad"));
+                Producto.add(resultSet.getString("Precio_Costo_USD"));
+                Producto.add(resultSet.getString("Precio_Costo_BS"));
+                Producto.add(resultSet.getString("Precio_Venta_USD"));
+                Producto.add(resultSet.getString("Precio_Venta_BS"));
+            }
+            return Producto;
+        } catch (RuntimeException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
 
