@@ -1,5 +1,9 @@
 package Utils;
 
+import Controller.DashboardController;
+import Controller.Facturar.DashboardFacturarController;
+import Controller.Inventario.ElegirProductoController;
+import Model.Facturar.DashboardFacturarModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
@@ -115,8 +119,13 @@ public class OpenView {
     }
 
     public void DashboardFacturar() throws Exception {
+        DashboardFacturarModel DashboardFacturarmodel = new DashboardFacturarModel();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.DashboardFacturar));
         AnchorPane pane = loader.load();
+
+        DashboardFacturarController FacturarController = loader.getController();
+        FacturarController.initialize(DashboardFacturarmodel);
+
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DashboardFacturarCSS)).toExternalForm());
@@ -191,6 +200,25 @@ public class OpenView {
         Stage stage = new Stage();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.VerClientesCSS)).toExternalForm());
         stage.setScene(scene);
+        stage.show();
+    }
+
+    public void ElegirProducto(DashboardFacturarModel dashboardFacturarmodel) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.ElegirProducto));
+        AnchorPane pane = loader.load();
+
+        // Obtener el controlador de la nueva ventana
+        ElegirProductoController elegirProductoController = loader.getController();
+        elegirProductoController.initialize(dashboardFacturarmodel);
+
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.ElegirProductoCSS)).toExternalForm());
+        stage.setScene(scene);
+
+        // Configurar el evento de cierre
+
+
         stage.show();
     }
 }

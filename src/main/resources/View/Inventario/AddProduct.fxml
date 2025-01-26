@@ -24,7 +24,7 @@
                <children>
                   <Pane layoutY="-3.0" prefHeight="383.0" prefWidth="529.0">
                      <children>
-                        <Label fx:id="lblNombreProducto" layoutX="14.0" layoutY="14.0" styleClass="label" text="Nombre Producto: " />
+                        <Label layoutX="14.0" layoutY="14.0" styleClass="label" text="Nombre Producto: " />
                         <Label layoutX="14.0" layoutY="60.0" styleClass="label" text="Descripción: " />
                         <Label layoutX="14.0" layoutY="108.0" styleClass="label" text="Unidades: " />
                         <TextField fx:id="txtNombreProducto" layoutX="240.0" layoutY="8.0" prefHeight="26.0" prefWidth="211.0" promptText="Nombre del Producto" styleClass="text-field" />

@@ -46,7 +46,7 @@ public class AutenticacionService {
 
     public boolean Login (String usuario, String password) {
         boolean isAuthenticated = false;
-        String query = "SELECT * FROM Usuarios.Users WHERE USERNAME = ? AND PASSWORD = ?";
+        String query = "SELECT * FROM Usuarios.Users WHERE USERNAME Collate Latin1_General_CI_AS = ? AND PASSWORD = ?";
 
         try (Connection connection = Conect.Conect();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {

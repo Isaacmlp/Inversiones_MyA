@@ -21,10 +21,10 @@ public class Paths {
     public static final String DolarCSS = "/Style/Inventario/Dolar.css";
     public static final String DashboardMonedas = "/View/Monedas/DashboardMonedas.fxml";
     public static final String DashboardMonedasCSS = "/Style/Monedas/DasboardMonedas.css";
-    public static final String DashboardFacturar = "/View/Facturar/DasboardFacturar.fxml";
+    public static final String DashboardFacturar = "/View/Facturar/DashboardFacturar.fxml";
     public static final String DashboardFacturarCSS = "/Style/Facturar/DasboardFacturar.css";
     public static final String DashboardFacturas = "/View/Facturas/DashboardFacturas.fxml";
-    public static final String DashboardFacturasCSS = "/Style/Facturas/DasboardFacturas.css";
+    public static final String DashboardFacturasCSS = "/Style/Facturas/DashboardFacturas.css";
     public static final String DashboardClientes = "/View/Clientes/DashboardClientes.fxml";
     public static final String DashboardClientesCSS = "/Style/Clientes/DashboardClientes.css";
     public static final String AgregarClientes = "/View/Clientes/AgregarCliente.fxml";
@@ -37,4 +37,6 @@ public class Paths {
     public static final String EliminarClientesCSS = "/Style/Clientes/EliminarCliente.css";
     public static final String VerClientes = "/View/Clientes/VerClientes.fxml";
     public static final String VerClientesCSS = "/Style/Clientes/VerClientes.css";
+    public static final String ElegirProducto = "/View/Inventario/ElegirProducto.fxml";
+    public static final String ElegirProductoCSS = "/Style/Inventario/ElegirProducto.css";
 }

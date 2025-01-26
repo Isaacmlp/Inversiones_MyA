@@ -9,17 +9,12 @@ import java.util.Locale;
 
 
 public class AddProductController {
-    @FXML
-    private Button BtnGuardarProducto;
 
     @FXML
     private ComboBox<String> ComboPorcentaje;
 
     @FXML
     private TextField TxtPrecioCostoBs;
-
-    @FXML
-    private Label lblNombreProducto;
 
     @FXML
     private TextField txtDescripcionProducto;
@@ -36,7 +31,7 @@ public class AddProductController {
     private final AddProductModel addProductModel = new AddProductModel();
 
     @FXML
-    void GuardarProducto(ActionEvent event) {
+    void GuardarProducto() {
             if(txtNombreProducto.getText().isEmpty() || txtDescripcionProducto.getText().isEmpty() || txtUnidadesProducto.getText().isEmpty() || TxtPrecioCostoBs.getText().isEmpty() || txtPrecioVentaBs.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -75,36 +70,16 @@ public class AddProductController {
     void CalcularPorcentaje(ActionEvent event) {
         if (event.getSource() == ComboPorcentaje) {
             switch (ComboPorcentaje.getValue()) {
-                case "5%" -> {
-                    txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.05)));
-                }
-                case "10%" -> {
-                    txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.1)));
-                }
-                case "15%" -> {
-                    txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.15)));
-                }
-                case "20%" -> {
-                    txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.2)));
-                }
-                case "25%" -> {
-                    txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.25)));
-                }
-                case "30%" -> {
-                    txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.3)));
-                }
-                case "35%" -> {
-                    txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.35)));
-                }
-                case "40%" -> {
-                    txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.4)));
-                }
-                case "45%" -> {
-                    txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.45)));
-                }
-                case "50%" -> {
-                    txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.5)));
-                }
+                case "5%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.05)));
+                case "10%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.1)));
+                case "15%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.15)));
+                case "20%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.2)));
+                case "25%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.25)));
+                case "30%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.3)));
+                case "35%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.35)));
+                case "40%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.4)));
+                case "45%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.45)));
+                case "50%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.5)));
             }
         }
     }

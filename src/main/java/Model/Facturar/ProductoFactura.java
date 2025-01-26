@@ -17,6 +17,16 @@ public class ProductoFactura {
         this.TotalUSD = TotalUSD;
     }
 
+    public ProductoFactura(String Nombre, double Cantidad, double PrecioUSD, double PrecioBS) {
+        this.Nombre = Nombre;
+        this.Cantidad = Cantidad;
+        this.PrecioUSD = PrecioUSD;
+        this.PrecioBS = PrecioBS;
+        this.TotalBs += PrecioBS;
+        this.TotalUSD += PrecioUSD;
+
+    }
+
     public String getNombreFacturado() {
         return Nombre;
     }
