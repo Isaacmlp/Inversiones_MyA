@@ -140,7 +140,7 @@ public class DashboardFacturarController {
 
     @FXML
     void Pagar() {
-
+        Open.Pagar(DasboardFacturar);
     }
 
     public void ActualizarVista() {

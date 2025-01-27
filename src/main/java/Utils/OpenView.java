@@ -2,14 +2,17 @@ package Utils;
 
 import Controller.DashboardController;
 import Controller.Facturar.DashboardFacturarController;
+import Controller.Facturar.PagarController;
 import Controller.Inventario.ElegirProductoController;
 import Model.Facturar.DashboardFacturarModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class OpenView {
@@ -218,7 +221,32 @@ public class OpenView {
 
         // Configurar el evento de cierre
 
-
         stage.show();
+    }
+
+    public void Pagar(DashboardFacturarModel DashboardFacturarModel) {
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.Pagar));
+                AnchorPane pane = loader.load();
+
+                PagarController PagarController = loader.getController();
+                PagarController.initialize(DashboardFacturarModel);
+
+                Scene scene = new Scene(pane);
+                Stage stage = new Stage();
+
+                String cssPath = Objects.requireNonNull(getClass().getResource(Paths.PagarCSS)).toExternalForm();
+                if (cssPath != null) {
+                    scene.getStylesheets().add(cssPath);
+                } else {
+                    System.err.println("CSS file not found: " + Paths.PagarCSS);
+                }
+
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 }

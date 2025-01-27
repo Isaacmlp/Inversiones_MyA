@@ -39,4 +39,6 @@ public class Paths {
     public static final String VerClientesCSS = "/Style/Clientes/VerClientes.css";
     public static final String ElegirProducto = "/View/Inventario/ElegirProducto.fxml";
     public static final String ElegirProductoCSS = "/Style/Inventario/ElegirProducto.css";
+    public static final String Pagar = "/View/Facturar/Pagar.fxml";
+    public static final String PagarCSS = "/Style/Facturar/Pagar.css";
 }
