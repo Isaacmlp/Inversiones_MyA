@@ -60,6 +60,14 @@ public class ElegirProductoController {
 
     private void enviarInformacion() {
         ArrayList<String> Productos = elegirProductoModel.GetProductTable(TablaInventario);
+        if (Double.parseDouble(Productos.get(4)) == 0.0 ||Double.parseDouble(Productos.get(4)) == 0) {
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setTitle("Error");
+            alert2.setHeaderText("Producto sin stock");
+            alert2.showAndWait();
+            return;
+        }
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Seleccionar Cantidad");
         alert.setHeaderText("Cuantos unidades desea Llevar?");
@@ -78,11 +86,13 @@ public class ElegirProductoController {
             if (response == ButtonType.OK) {
                 // Obtener el texto ingresado en el TextField
                 String input = inputField.getText();
-                System.out.println("User input: " + input);
             }
         });
 
-        while (Double.parseDouble(Productos.get(4)) < Double.parseDouble(inputField.getText())) {
+
+
+
+        while (Double.parseDouble(Productos.get(4)) < Double.parseDouble(inputField.getText()) || (Double.parseDouble(inputField.getText()) < 0)) {
             alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Seleccionar Cantidad");
             alert.setHeaderText("Ingrese una cantidad menor o igual al Stock? Stock: " + Productos.get(4));
@@ -104,7 +114,6 @@ public class ElegirProductoController {
                 if (response == ButtonType.OK) {
                     // Obtener el texto ingresado en el TextField
                     String input = inputField.getText();
-                    System.out.println("User input: " + input);
                 }
 
                 if (response == ButtonType.CANCEL) {
@@ -130,7 +139,7 @@ public class ElegirProductoController {
     public void initialize(DashboardFacturarModel dashboardFacturarmodel) {
         this.DashboardFacturarmodel = dashboardFacturarmodel;
         KeyPressed();
-        Dolar.ActualizarDolar();
+        //Dolar.ActualizarDolar();
         VerInventario.cargarInventarioTabla(NombreProductoColumn,DescripcionColumn,CantidadColumn,PrecioVentaUSDColumn,PrecioVentaBsColumn,TablaInventario);
     }
 

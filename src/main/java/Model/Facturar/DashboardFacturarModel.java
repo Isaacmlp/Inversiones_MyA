@@ -24,6 +24,32 @@ public class DashboardFacturarModel {
     ObservableList<ProductoFactura> datos = FXCollections.observableArrayList();
     ObservableList<ProductoFactura> Data ;
     boolean Estado = false;
+    public int IDCLiente;
+    boolean CleanALL = false;
+
+    public int getIDCliente() {
+        return IDCLiente;
+    }
+
+    public void setData(ObservableList<ProductoFactura> data) {
+        this.Data = data;
+    }
+
+    public ObservableList<ProductoFactura> getData() {
+        return Data;
+    }
+
+    public void setCleanALL(boolean cleanALL) {
+        this.CleanALL = cleanALL;
+    }
+
+    public boolean getCleanALL() {
+        return CleanALL;
+    }
+
+    public void setIDCliente(int idCliente) {
+        IDCLiente = idCliente;
+    }
 
     public  ObservableList<ProductoFactura> getDatos() {
         return datos;
@@ -40,6 +66,10 @@ public class DashboardFacturarModel {
 
     public void setProducto(ArrayList<String> producto) {
        this.Producto = producto;
+    }
+
+    public ArrayList<String> getProducto() {
+        return this.Producto;
     }
 
     public ArrayList<String> GetProducto() {
@@ -70,9 +100,6 @@ public class DashboardFacturarModel {
 
     public void CargarProductosFacturados(TableView<ProductoFactura> TablaInventario,ArrayList<String> Producto) {
           Data  = FXCollections.observableArrayList();
-          for (String producto : Producto) {
-              System.out.println(producto + " Index: " + Producto.indexOf(producto));
-          }
         for (int i = 0; i < Producto.size(); i += 5) {
             ProductoFactura productoFactura = new ProductoFactura(
                     Producto.get(i),
@@ -207,8 +234,25 @@ public class DashboardFacturarModel {
             // Mostrar un mensaje si no hay ningún producto seleccionado
             System.out.println("No se ha seleccionado ningún producto para eliminar.");
         }
-
-
     }
 
+    public void EliminartodoslosProductosTabla(TableView<ProductoFactura> TablaFacturas) {
+        // Obtener la lista de productos seleccionados
+        ObservableList<ProductoFactura> data = TablaFacturas.getItems();
+
+        if (!data.isEmpty()) {
+            // Crear un bucle para recorrer la lista de productos
+            for (ProductoFactura producto : data) {
+                // Eliminar el producto seleccionado
+                TablaFacturas.getItems().remove(producto);
+            }
+
+            // Imprimir tamaño después de la eliminación
+            System.out.println("Tamaño de la lista después de eliminar: " + data.size());
+        } else {
+            // Mostrar un mensaje si no hay ningún producto seleccionado
+            System.out.println("No se ha seleccionado ningún producto para eliminar.");
+        }
+
+    }
 }

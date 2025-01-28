@@ -6,11 +6,13 @@ import Model.Facturar.ProductoFactura;
 import Utils.OpenView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
@@ -23,6 +25,8 @@ public class DashboardFacturarController {
     private final OpenView Open = new OpenView();
     private ObservableList<ProductoFactura> Data;
     private ArrayList<Double> Totales;
+
+
 
 
     private ArrayList<String> Producto = new ArrayList<>();
@@ -117,6 +121,7 @@ public class DashboardFacturarController {
         TelefonoTXT.setText(DatosCliente.get(3));
         DireccionTXT.setText(DatosCliente.get(4));
         CorreoTXT.setText(DatosCliente.get(5));
+        DasboardFacturar.setIDCliente(Integer.parseInt(DatosCliente.get(6)));
     }
 
     private void KeyEventCliente() {
@@ -146,10 +151,10 @@ public class DashboardFacturarController {
     public void ActualizarVista() {
         if (!DasboardFacturar.GetProducto().isEmpty()) {
             DasboardFacturar.cargarProductosFacturaTabla(NombreProductoTXT, CantidadTXT, PrecioUSDTXT, PrecioBSTXT, TablaProductos, DasboardFacturar.GetProducto());
-            Totales = DasboardFacturar.ObtenerTotales();
-            TotalPagarUSDTXT.setText(Totales.getFirst().toString() + " $");
-            TotalPagarBSTXT.setText(Totales.get(1).toString() + " Bs");
         }
+        Totales = DasboardFacturar.ObtenerTotales();
+        TotalPagarUSDTXT.setText(Totales.getFirst().toString() + " $");
+        TotalPagarBSTXT.setText(Totales.get(1).toString() + " Bs");
     }
 
     public void TimelineTest() {
@@ -158,13 +163,40 @@ public class DashboardFacturarController {
                 ActualizarVista();
                 DasboardFacturar.setEstado(false);
             }
+
+            if (DasboardFacturar.getCleanALL()) {
+                Clean();
+                DasboardFacturar.setCleanALL(false);
+                ((Stage) CorreoTXT.getScene().getWindow()).close();
+            }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
 
+    private void Clean() {
+        CleanFields();
+        CleanProduct();
+    }
 
+    private void CleanFields() {
+        CedulaTXT.setText("");
+        CorreoTXT.setText("");
+        ApellidoTXT.setText("");
+        DireccionTXT.setText("");
+        NombreTXT.setText("");
+        TelefonoTXT.setText("");
+        TotalPagarBSTXT.setText("");
+        TotalPagarUSDTXT.setText("");
+    }
 
+    private void CleanProduct() {
+       if ( DasboardFacturar.getProducto().isEmpty() || TablaProductos.getItems().isEmpty() || DasboardFacturar.getData().isEmpty()) {
+           DasboardFacturar.getProducto().clear();
+           DasboardFacturar.EliminartodoslosProductosTabla(TablaProductos);
+           DasboardFacturar.getData().clear();
+       }
+    }
 
     @FXML
     public void initialize(DashboardFacturarModel dasboardFacturarModel) {

@@ -37,7 +37,7 @@ public class ModificarClienteModel {
     }
 
     public ArrayList<String> BuscarCliente(String cedula) {
-        String SQl = "SELECT NOMBRE, APELLIDO, CEDULA, TELEFONO, DIRECCION, CORREO FROM Clientes.Cliente WHERE Cedula = ?";
+        String SQl = "SELECT NOMBRE, APELLIDO, CEDULA, TELEFONO, DIRECCION, CORREO, ID FROM Clientes.Cliente WHERE Cedula = ?";
         ArrayList<String> resultado = new ArrayList<>();
         try (Connection conexion = Conect.Conect();
              PreparedStatement ps = conexion.prepareStatement(SQl)) {
@@ -50,6 +50,7 @@ public class ModificarClienteModel {
                 resultado.add(rs.getString(4));
                 resultado.add(rs.getString(5));
                 resultado.add(rs.getString(6));
+                resultado.add(rs.getString(7));
             }
             return resultado;
         } catch (SQLException ex) {
