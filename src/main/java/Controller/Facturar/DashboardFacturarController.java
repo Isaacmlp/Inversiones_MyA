@@ -145,7 +145,27 @@ public class DashboardFacturarController {
 
     @FXML
     void Pagar() {
+        if (CedulaTXT.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Campos vacios");
+            alert.setContentText("Ingrese la Cedula del Cliente");
+            alert.showAndWait();
+            return;
+        }
+
+        if (TablaProductos.getItems().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No hay productos");
+            alert.setContentText("No hay productos para pagar");
+            alert.showAndWait();
+            return;
+        }
+
         Open.Pagar(DasboardFacturar);
+
+
     }
 
     public void ActualizarVista() {

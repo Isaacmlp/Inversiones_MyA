@@ -52,59 +52,128 @@ public class PagarController {
             return;
         }
 
+        if (Objects.equals(ComboMetodoPago.getValue(), "Pago Movil") || Objects.equals(ComboMetodoPago.getValue(), "Transferencia Bancaria") || Objects.equals(ComboMetodoPago.getValue(), "Efectivo Bolivares")) {
+            BigDecimal montoPagado = new BigDecimal(MontoPagadoTXT.getText()).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal totalBs = new BigDecimal(Totales.get(1).toString()).setScale(2, RoundingMode.HALF_UP);
 
-        if (Objects.equals(MontoPagadoTXT.getText(), Totales.get(1).toString())) {
-            MetodosPago.add(ComboMetodoPago.getValue());
-            MetodosPago.add(MontoPagadoTXT.getText());
-            MetodosPago.add(NroReferenciaTXT.getText());
+            if (montoPagado.compareTo(totalBs) == 0) {
+                MetodosPago.add(ComboMetodoPago.getValue());
+                MetodosPago.add(montoPagado.toString());
+                MetodosPago.add(NroReferenciaTXT.getText());
 
-            Totales.set(1, Totales.get(1) - MontoPagado );
-            BigDecimal TotalBs = BigDecimal.valueOf(Totales.get(1));
-            TotalBs = TotalBs.setScale(2, RoundingMode.HALF_UP);
+                totalBs = totalBs.subtract(montoPagado).setScale(2, RoundingMode.HALF_UP);
+                Totales.set(1, totalBs.doubleValue());
 
-            Totales.set(0, Totales.get(0) /*- (MontoPagado / getCurrency.getCurrency().bcv())*/);
-            BigDecimal TotalUSD = BigDecimal.valueOf(Totales.getFirst());
-            TotalUSD = TotalUSD.setScale(2, RoundingMode.HALF_UP);
+                BigDecimal montoPagadoUSD = montoPagado.divide(new BigDecimal(getCurrency.getCurrency().bcv()), 2, RoundingMode.HALF_UP);
+                BigDecimal totalUSD = new BigDecimal(Totales.getFirst().toString()).setScale(2, RoundingMode.HALF_UP);
+                totalUSD = totalUSD.subtract(montoPagadoUSD).setScale(2, RoundingMode.HALF_UP);
+                Totales.set(0, totalUSD.doubleValue());
 
-            TotalUSDTXT.setText(TotalUSD.toString() + " $");
-            TotalBsTXT.setText(TotalBs.toString() + " Bs");
-            if (PagarFactura()) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Pago Exitoso");
-                alert.setHeaderText("El pago se ha realizado con exito");
-                alert.setContentText("El monto de pago es igual al total de la factura");
-                alert.showAndWait();
-                ((Stage) TotalBsTXT.getScene().getWindow()).close();
-                dashboardFacturarModel.setCleanALL(true);
+                TotalUSDTXT.setText(totalUSD.toString() + " $");
+                TotalBsTXT.setText(totalBs.toString() + " Bs");
+
+                if (PagarFactura()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Pago Exitoso");
+                    alert.setHeaderText("El pago se ha realizado con éxito");
+                    alert.setContentText("El monto de pago es igual al total de la factura");
+                    alert.showAndWait();
+                    ((Stage) TotalBsTXT.getScene().getWindow()).close();
+                    dashboardFacturarModel.setCleanALL(true);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("No se ha podido realizar el pago");
+                    alert.setContentText("Ha ocurrido un error al realizar el pago");
+                    alert.showAndWait();
+                }
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("No se ha podido realizar el pago");
-                alert.setContentText("Ha ocurrido un error al realizar el pago");
+                MetodosPago.add(ComboMetodoPago.getValue());
+                MetodosPago.add(montoPagado.toString());
+                MetodosPago.add(NroReferenciaTXT.getText());
+
+                totalBs = totalBs.subtract(montoPagado).setScale(2, RoundingMode.HALF_UP);
+                Totales.set(1, totalBs.doubleValue());
+
+                BigDecimal montoPagadoUSD = montoPagado.divide(new BigDecimal(getCurrency.getCurrency().bcv()), 2, RoundingMode.HALF_UP);
+                BigDecimal totalUSD = new BigDecimal(Totales.getFirst().toString()).setScale(2, RoundingMode.HALF_UP);
+                totalUSD = totalUSD.subtract(montoPagadoUSD).setScale(2, RoundingMode.HALF_UP);
+                Totales.set(0, totalUSD.doubleValue());
+
+                TotalUSDTXT.setText(totalUSD.toString() + " $");
+                TotalBsTXT.setText(totalBs.toString() + " Bs");
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Pago");
+                alert.setHeaderText("Pendiente");
+                alert.setContentText("Pendiente por Pagar : " + totalBs.toString() + " bs");
+                alert.showAndWait();
+            }
+        } else if (Objects.equals(ComboMetodoPago.getValue(), "Efectivo USD") || Objects.equals(ComboMetodoPago.getValue(), "Zinli") || Objects.equals(ComboMetodoPago.getValue(), "Binance")) {
+            BigDecimal montoPagado = new BigDecimal(MontoPagadoTXT.getText()).setScale(2, RoundingMode.HALF_UP);
+            BigDecimal totalUSD = new BigDecimal(Totales.getFirst().toString()).setScale(2, RoundingMode.HALF_UP);
+
+            if (montoPagado.compareTo(totalUSD) == 0) {
+                MetodosPago.add(ComboMetodoPago.getValue());
+                MetodosPago.add(montoPagado.toString());
+                MetodosPago.add(NroReferenciaTXT.getText());
+
+                BigDecimal montoPagadoBs = montoPagado.multiply(new BigDecimal(getCurrency.getCurrency().bcv())).setScale(2, RoundingMode.HALF_UP);
+                BigDecimal totalBs = new BigDecimal(Totales.get(1).toString()).setScale(2, RoundingMode.HALF_UP);
+                totalBs = totalBs.subtract(montoPagadoBs).setScale(2, RoundingMode.HALF_UP);
+                Totales.set(1, totalBs.doubleValue());
+
+                totalUSD = totalUSD.subtract(montoPagado).setScale(2, RoundingMode.HALF_UP);
+                Totales.set(0, totalUSD.doubleValue());
+
+                TotalUSDTXT.setText(totalUSD.toString() + " $");
+                TotalBsTXT.setText(totalBs.toString() + " Bs");
+
+                if (PagarFactura()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Pago Exitoso");
+                    alert.setHeaderText("El pago se ha realizado con éxito");
+                    alert.setContentText("El monto de pago es igual al total de la factura");
+                    alert.showAndWait();
+                    ((Stage) TotalBsTXT.getScene().getWindow()).close();
+                    dashboardFacturarModel.setCleanALL(true);
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("No se ha podido realizar el pago");
+                    alert.setContentText("Ha ocurrido un error al realizar el pago");
+                    alert.showAndWait();
+                }
+            } else {
+                MetodosPago.add(ComboMetodoPago.getValue());
+                MetodosPago.add(montoPagado.toString());
+                MetodosPago.add(NroReferenciaTXT.getText());
+
+                BigDecimal montoPagadoBs = montoPagado.multiply(new BigDecimal(getCurrency.getCurrency().bcv())).setScale(2, RoundingMode.HALF_UP);
+                BigDecimal totalBs = new BigDecimal(Totales.get(1).toString()).setScale(2, RoundingMode.HALF_UP);
+                totalBs = totalBs.subtract(montoPagadoBs).setScale(2, RoundingMode.HALF_UP);
+                Totales.set(1, totalBs.doubleValue());
+
+                totalUSD = totalUSD.subtract(montoPagado).setScale(2, RoundingMode.HALF_UP);
+                Totales.set(0, totalUSD.doubleValue());
+
+                TotalUSDTXT.setText(totalUSD.toString() + " $");
+                TotalBsTXT.setText(totalBs.toString() + " Bs");
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Pago");
+                alert.setHeaderText("Pendiente");
+                alert.setContentText("Pendiente por Pagar : " + totalBs.toString() + " bs");
                 alert.showAndWait();
             }
         } else {
-            MetodosPago.add(ComboMetodoPago.getValue());
-            MetodosPago.add(MontoPagadoTXT.getText());
-            MetodosPago.add(NroReferenciaTXT.getText());
-
-            Totales.set(1, Totales.get(1) - MontoPagado );
-            BigDecimal TotalBs = BigDecimal.valueOf(Totales.get(1));
-            TotalBs = TotalBs.setScale(2, RoundingMode.HALF_UP);
-
-            Totales.set(0, Totales.get(0) /*- (MontoPagado / getCurrency.getCurrency().bcv())*/);
-            BigDecimal TotalUSD = BigDecimal.valueOf(Totales.getFirst());
-            TotalUSD = TotalUSD.setScale(2, RoundingMode.HALF_UP);
-
-            TotalUSDTXT.setText(TotalUSD.toString() + " $");
-            TotalBsTXT.setText(TotalBs.toString() + " Bs");
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Pago");
-            alert.setHeaderText("Pendiente");
-            alert.setContentText("Pendiente por Pagar : " + Totales.get(1).toString() + " bs");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Campos Vacíos");
+            alert.setContentText("Seleccione un método de pago");
             alert.showAndWait();
+            return;
         }
-
     }
 
     private void CleanFields() {
