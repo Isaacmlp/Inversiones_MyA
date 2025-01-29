@@ -2,11 +2,11 @@ package Model.Facturar;
 
 class DetalleFactura {
     private String nombreProducto;
-    private int cantidad;
+    private Double cantidad;
     private double precioUnitariobs;
     private double precioUnitarioUSD;
 
-    public DetalleFactura(String nombreProducto, int Cantidad, double precioUnitariobs, double precioUnitarioUSD) {
+    public DetalleFactura(String nombreProducto, Double Cantidad, double precioUnitariobs, double precioUnitarioUSD) {
         this.nombreProducto = nombreProducto;
         this.cantidad = Cantidad;
         this.precioUnitariobs = precioUnitariobs;
@@ -25,7 +25,7 @@ class DetalleFactura {
         return nombreProducto;
     }
 
-    public int getCantidadFactura() {
+    public Double getCantidadFactura() {
         return cantidad;
     }
 

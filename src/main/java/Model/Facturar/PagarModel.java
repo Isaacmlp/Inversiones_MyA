@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,7 +50,7 @@ public class PagarModel {
         for (int i = 0; i < productos.size(); i += 5) {
             try {
                 String nombreProducto = productos.get(i);
-                int cantidad = Integer.parseInt(productos.get(i + 4));
+                Double cantidad = Double.parseDouble(productos.get(i + 4));
                 double precioUnitario = Double.parseDouble(productos.get(i + 3));
                 double descuento = Double.parseDouble(productos.get(i + 2));
 
@@ -98,9 +99,9 @@ public class PagarModel {
 
     }
 
-    public boolean insertarFacturaCompleta(int idCliente, String fecha, double totalbs,double totalusd, String estado,
-                                       String detallesFactura, String metodosPago) {
-        String sql = "{call Ventas.InsertarFacturaCompleta(?, ?, ?, ?, ?, ?,?)}";
+    public boolean insertarFacturaCompleta(int idCliente, String fecha, double totalbs, double totalusd, String estado,
+                                           String detallesFactura, String metodosPago) {
+        String sql = "{call Ventas.InsertarFacturaCompleta(?, ?, ?, ?, ?, ?, ?, ?)}";
 
         try (Connection conn = conectar.Conect();
              CallableStatement cstmt = conn.prepareCall(sql)) {
@@ -111,22 +112,29 @@ public class PagarModel {
             cstmt.setDouble(3, totalbs);
             cstmt.setDouble(4, totalusd);
             cstmt.setString(5, estado);
-
-            // Convertir los arrays de Java a tipos de SQL Server
             cstmt.setString(6, detallesFactura);
             cstmt.setString(7, metodosPago);
 
+            // Registrar el parámetro de salida
+            cstmt.registerOutParameter(8, Types.BIT);
+
             // Ejecutar el procedimiento almacenado
             cstmt.execute();
-            return true;
+
+            // Obtener el valor del parámetro de salida
+
+            // Retornar true solo si el procedimiento fue exitoso
+            return cstmt.getBoolean(8);
         } catch (SQLException e) {
+            // Mostrar el mensaje de error en una alerta
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error!");
             alert.setHeaderText(null);
-            alert.setContentText(e.getMessage());
+            alert.setContentText("Error al insertar la factura: " + e.getMessage());
             alert.showAndWait();
-            // Manejar la excepción adecuadamente
+
+            // Retornar false para indicar que la operación falló
+            return false;
         }
-        return false;
     }
 }

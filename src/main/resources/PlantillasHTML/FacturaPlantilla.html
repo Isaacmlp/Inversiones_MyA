@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Factura</title>
+    <style type="">
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .invoice-box {
+            max-width: 600px; /* Reducido de 800px a 600px */
+            margin: auto;
+            padding: 20px; /* Reducido el padding */
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            font-size: 14px; /* Reducido el tamaño de la fuente */
+            line-height: 20px; /* Ajustado el line-height */
+            color: #555;
+        }
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+            border-collapse: collapse;
+        }
+        .invoice-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        .invoice-box table tr td:nth-child(2) {
+            text-align: right;
+        }
+        .invoice-box table tr.top table td {
+            padding-bottom: 15px; /* Reducido el padding */
+        }
+        .invoice-box table tr.top table td.title {
+            font-size: 35px; /* Reducido el tamaño de la fuente */
+            line-height: 35px; /* Ajustado el line-height */
+            color: #333;
+        }
+        .invoice-box table tr.information table td {
+            padding-bottom: 30px; /* Reducido el padding */
+        }
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+        .invoice-box table tr.details td {
+            padding-bottom: 15px; /* Reducido el padding */
+        }
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #eee;
+        }
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
+        .invoice-box table tr.total td:nth-child(2) {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="invoice-box">
+    <table>
+        <tr class="top">
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td class="title">
+                            <img src="" style="width:100%; max-width:200px;" /> <!-- Reducido el tamaño de la imagen -->
+                        </td>
+                        <td>
+                            Factura #: <span th:text="${factura.numeroFactura}"></span><br />
+                            Fecha: <span th:text="${factura.FechaFactura}"></span><br />
+                            Estado: <span th:text="${factura.estadoFactura}"></span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr class="information">
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td>
+                            <span th:text="${factura.NombreCliente}"></span><br />
+                            <span th:text="${factura.TelefonoCliente}"></span><br />
+                            <span th:text="${factura.CorreoCliente}"></span>
+                        </td>
+                        <td>
+                            InversionesMyA C.A<br />
+                            Urbanización San Fernando 2000<br />
+                            Apure, San Fernando
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr class="heading">
+            <td>Método de Pago</td>
+            <td>Monto Pagado</td>
+        </tr>
+        <tr th:each="Pago : ${factura.Pago}" class="details">
+            <td><span th:text="${Pago.MetodoPago}"></span></td>
+            <td><span th:text="${Pago.MontoPagado}"></span></td>
+        </tr>
+        <table class="table">
+            <thead>
+            <tr class="heading">
+                <th>Producto</th>
+                <th>Precio Unitario (Bs)</th>
+                <th>Cantidad</th>
+                <th>Subtotal (Bs)</th>
+                <th>Subtotal (USD)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="Producto : ${factura.Producto}" class="item">
+                <td><span th:text="${Producto.NombreProducto}"></span></td>
+                <td><span th:text="${Producto.PrecioUnitarioBs}"></span></td>
+                <td><span th:text="${Producto.Cantidad}"></span></td>
+                <td><span th:text="${Producto.SubTotalBs}"></span></td>
+                <td><span th:text="${Producto.SubTotalUSD}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="totales">
+            <table>
+                <tr class="total">
+                    <td>Total (Bs):</td>
+                    <td><span th:text="${factura.totalBsFactura}"></span></td>
+                </tr>
+                <tr class="total">
+                    <td>Total (USD):</td>
+                    <td><span th:text="${factura.totalUSDFactura}"></span></td>
+                </tr>
+            </table>
+        </div>
+    </table>
+</div>
+</body>
+</html>

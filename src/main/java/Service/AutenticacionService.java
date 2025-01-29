@@ -44,9 +44,9 @@ public class AutenticacionService {
         return false;
     }
 
-    public boolean Login (String usuario, String password) {
+    public boolean Login(String usuario, String password) {
         boolean isAuthenticated = false;
-        String query = "SELECT * FROM Usuarios.Users WHERE USERNAME Collate Latin1_General_CI_AS = ? AND PASSWORD = ?";
+        String query = "SELECT * FROM Usuarios.Users WHERE USERNAME COLLATE Latin1_General_CS_AS = ? AND PASSWORD = ?";
 
         try (Connection connection = Conect.Conect();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -59,11 +59,10 @@ public class AutenticacionService {
             }
 
         } catch (SQLException e) {
-            e.getMessage();
+            e.printStackTrace(); // Es mejor imprimir la traza completa del error para depuración
         }
         return isAuthenticated;
     }
-
     public int GetID(String usuario) {
         int ID = -1;
         String query = "SELECT ID FROM Usuarios.Users WHERE USERNAME = ?";

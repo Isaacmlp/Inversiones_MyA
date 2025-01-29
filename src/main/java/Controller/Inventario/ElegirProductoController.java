@@ -139,7 +139,7 @@ public class ElegirProductoController {
     public void initialize(DashboardFacturarModel dashboardFacturarmodel) {
         this.DashboardFacturarmodel = dashboardFacturarmodel;
         KeyPressed();
-        //Dolar.ActualizarDolar();
+        Dolar.ActualizarDolar();
         VerInventario.cargarInventarioTabla(NombreProductoColumn,DescripcionColumn,CantidadColumn,PrecioVentaUSDColumn,PrecioVentaBsColumn,TablaInventario);
     }
 

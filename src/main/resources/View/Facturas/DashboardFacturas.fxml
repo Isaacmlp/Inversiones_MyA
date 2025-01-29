@@ -1,119 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1380.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Facturas.DasboardFacturasController">
-    <children>
-        <TitledPane animated="false" layoutX="32.0" layoutY="19.0" prefHeight="498.0" prefWidth="295.0" text="Inventario">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <children>
-                        <GridPane layoutY="-1.0" prefHeight="636.0" prefWidth="289.0">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="167.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="122.0" />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            </rowConstraints>
-                            <children>
-                                <Label text="Agregar Producto:">
-                                    <GridPane.margin>
-                                        <Insets left="5.0" />
-                                    </GridPane.margin></Label>
-                                <Label text="Modificar Producto" GridPane.rowIndex="1">
-                                    <GridPane.margin>
-                                        <Insets left="5.0" />
-                                    </GridPane.margin>
-                                </Label>
-                                <Label text="Eliminar Producto:" GridPane.rowIndex="2">
-                                    <GridPane.margin>
-                                        <Insets left="5.0" />
-                                    </GridPane.margin>
-                                </Label>
-                                <Label text="Buscar Producto:" GridPane.rowIndex="3">
-                                    <GridPane.margin>
-                                        <Insets left="5.0" />
-                                    </GridPane.margin>
-                                </Label>
-                                <ImageView fitHeight="58.0" fitWidth="90.0" onMouseClicked="#AgregarProducto" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-                                    <image>
-                                        <Image url="@../../Img/agregar-producto.png" />
-                                    </image>
-                                    <GridPane.margin>
-                                        <Insets left="35.0" />
-                                    </GridPane.margin>
-                                </ImageView>
-                                <ImageView fitHeight="62.0" fitWidth="72.0" onMouseClicked="#Modificar" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                    <image>
-                                        <Image url="@../../Img/personalizacion.png" />
-                                    </image>
-                                    <GridPane.margin>
-                                        <Insets left="35.0" />
-                                    </GridPane.margin>
-                                </ImageView>
-                                <ImageView fitHeight="58.0" fitWidth="68.0" onMouseClicked="#Eliminar" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                    <image>
-                                        <Image url="@../../Img/agotado.png" />
-                                    </image>
-                                    <GridPane.margin>
-                                        <Insets left="35.0" />
-                                    </GridPane.margin>
-                                </ImageView>
-                                <ImageView fitHeight="55.0" fitWidth="115.0" onMouseClicked="#Buscar" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                    <image>
-                                        <Image url="@../../Img/buscar.png" />
-                                    </image>
-                                    <GridPane.margin>
-                                        <Insets left="35.0" />
-                                    </GridPane.margin>
-                                </ImageView>
-                                <Label text="Ver Inventario:" GridPane.rowIndex="4">
-                                    <GridPane.margin>
-                                        <Insets left="5.0" />
-                                    </GridPane.margin>
-                                </Label>
-                                <ImageView fitHeight="55.0" fitWidth="115.0" onMouseClicked="#Ver" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                    <image>
-                                        <Image url="@../Img/inventario%20(2).png" />
-                                    </image>
-                                    <GridPane.margin>
-                                        <Insets left="35.0" />
-                                    </GridPane.margin>
-                                </ImageView>
-                                <Label text="Tasa Dolar:" GridPane.rowIndex="5">
-                                    <GridPane.margin>
-                                        <Insets left="5.0" />
-                                    </GridPane.margin>
-                                </Label>
-                                <ImageView fitHeight="55.0" fitWidth="115.0" onMouseClicked="#TasaDolar" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                    <image>
-                                        <Image url="@../../Img/simbolo-de-dolar.png" />
-                                    </image>
-                                    <GridPane.margin>
-                                        <Insets left="35.0" />
-                                    </GridPane.margin>
-                                </ImageView>
-                            </children>
-                        </GridPane>
-                    </children></AnchorPane>
-            </content>
-        </TitledPane>
-    </children>
+<AnchorPane prefHeight="700.0" prefWidth="1348.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Facturas.DasboardFacturasController">
+   <children>
+      <Label layoutX="624.0" layoutY="14.0" text="Facturas">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <TableView fx:id="TablaProductos" layoutX="301.0" layoutY="174.0" prefHeight="350.0" prefWidth="779.0">
+        <columns>
+          <TableColumn fx:id="NumeroFacturaColumn" prefWidth="159.0" text="Numero de Factura" />
+            <TableColumn fx:id="CedulaClienteColumn" prefWidth="134.0" text="Cedula Cliente" />
+            <TableColumn fx:id="FechaFacturaColumn" prefWidth="108.0" text="Fecha" />
+            <TableColumn fx:id="TotalBsFacturaColumn" prefWidth="122.0" text="Total Bs" />
+            <TableColumn fx:id="TotalUSDFacturaColumn" prefWidth="117.0" text="Total USD" />
+            <TableColumn fx:id="EstadoFacturaColumn" prefWidth="138.0" text="Estado" />
+        </columns>
+      </TableView>
+      <Label layoutX="341.0" layoutY="86.0" text="Buscar Facturas por fecha:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="FechaFacturaPicker" layoutX="671.0" layoutY="82.0" onAction="#BuscarAlSeleccionarFecha" prefHeight="35.0" prefWidth="240.0" />
+      <Button layoutX="598.0" layoutY="606.0" mnemonicParsing="false" onAction="#VerFactura" prefHeight="53.0" prefWidth="215.0" text="Ver Factura" />
+      <TitledPane fx:id="TotalTitle" animated="false" layoutX="1094.0" layoutY="318.0" prefHeight="368.0" prefWidth="240.0" text="Total">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <GridPane layoutY="1.0" prefHeight="322.0" prefWidth="240.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="TotalBSLBL" text="Total en Bs:" />
+                        <Label fx:id="TotalUSDLBL" text="Total en USD:" GridPane.rowIndex="1" />
+                        <Label fx:id="EfectivoBSLBL" text="Efectivo Bs" GridPane.rowIndex="2" />
+                        <Label fx:id="EfectivoUSDLBL" text="Efectivo USD" GridPane.rowIndex="3" />
+                        <Label fx:id="PagoMovilLBL" text="Pago Movil" GridPane.rowIndex="4" />
+                        <Label fx:id="TransferenciaLBL" text="Transferencia " GridPane.rowIndex="5" />
+                        <Label fx:id="ZinliLBL" text="Zinli" GridPane.rowIndex="6" />
+                        <Label fx:id="BinanceLBL" text="Binance" GridPane.rowIndex="7" />
+                        <Label fx:id="BiopagoLBL" text="Biopago" GridPane.rowIndex="8" />
+                        <Label fx:id="PuntodeVentaLBL" text="Punto de Venta" GridPane.rowIndex="9" />
+                        <Label fx:id="TotalBsTXT" text="Total en Bs:" GridPane.columnIndex="1" />
+                        <Label fx:id="TotalUSDTXT" text="Total en USD:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="EfectivobsTXT" text="Efectivo Bs" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="EfectivoUSDTXT" text="Efectivo USD" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="PagomovilTXT" text="Pago Movil" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="TransferenciaTXT" text="Transferencia " GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="ZinliTXT" text="Zinli" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="BinanceTXT" text="Binance" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label fx:id="BiopagoTXT" text="Biopago" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label fx:id="PuntodeVentaTXT" text="Punto de Venta" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+   </children>
 </AnchorPane>

@@ -1,15 +1,15 @@
 package Utils;
 
-import Controller.DashboardController;
 import Controller.Facturar.DashboardFacturarController;
 import Controller.Facturar.PagarController;
+import Controller.Facturas.VerFacturaCotroller;
 import Controller.Inventario.ElegirProductoController;
 import Model.Facturar.DashboardFacturarModel;
+import Model.Facturas.FacturasModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -248,5 +248,21 @@ public class OpenView {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+    }
+
+    public void VerFacturas(FacturasModel facturas) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.VerFacturas));
+        AnchorPane pane = loader.load();
+
+        VerFacturaCotroller VerFacturasController = loader.getController();
+        VerFacturasController.initialize(facturas);
+        VerFacturasController.setIdFactura(facturas.getIdFactura());
+
+
+        Scene scene = new Scene(pane);
+        Stage stage = new Stage();
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.VerFacturasCSS)).toExternalForm());
+        stage.setScene(scene);
+        stage.show();
     }
 }
