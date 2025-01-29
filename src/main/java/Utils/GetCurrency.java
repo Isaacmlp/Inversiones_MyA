@@ -11,6 +11,8 @@ import java.net.http.HttpResponse;
 
 public class GetCurrency {
     private final HttpClient client = HttpClient.newHttpClient();
+    double paraleloPrice ;
+    double bcvPrice ;
 
     public CurrencyObject getCurrency() {
         String apiUrl = "https://pydolarve.org/api/v1/dollar?page=alcambio";
@@ -24,7 +26,8 @@ public class GetCurrency {
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
-            throw new RuntimeException("Error llamando con la API");
+            // En caso de error, devolver valores predeterminados
+            return new CurrencyObject(57.30, 69.80);
         }
 
         boolean isResponseOK =
@@ -33,7 +36,8 @@ public class GetCurrency {
                         .startsWith("2");
 
         if (!isResponseOK) {
-            throw new RuntimeException("No se puede procesar la solicitud");
+            // En caso de respuesta no exitosa, devolver valores predeterminados
+            return new CurrencyObject(57.30, 69.80);
         }
 
         final String body = response.body();
@@ -45,8 +49,8 @@ public class GetCurrency {
         JSONObject bcv = monitors.getJSONObject("bcv");
         JSONObject paralelo = monitors.getJSONObject("enparalelovzla");
 
-        double paraleloPrice = paralelo.getDouble("price");
-        double bcvPrice = bcv.getDouble("price");
+        paraleloPrice = paralelo.getDouble("price");
+        bcvPrice = bcv.getDouble("price");
 
         return new CurrencyObject(bcvPrice, paraleloPrice);
     }
