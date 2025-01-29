@@ -34,7 +34,7 @@ public class VerClientesModel {
         ArrayList<String> Clientes = BuscarClientes();
         ObservableList<Cliente> datos = FXCollections.observableArrayList();
 
-        for (int i = 0 ; i < Clientes.size(); i += 7) {
+        for (int i = 0 ; i < Clientes.size(); i += 6) {
 
             Cliente cliente = new Cliente(
                     Clientes.get(i),
