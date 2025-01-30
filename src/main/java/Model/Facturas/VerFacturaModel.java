@@ -4,27 +4,20 @@ import Utils.ConectBD;
 import Utils.GetCurrency;
 import javafx.scene.control.Alert;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class VerFacturaModel {
     ConectBD Conect = new ConectBD();
     GetCurrency GetCurrency = new GetCurrency();
-    private int idFactura;
-
-    public int getIdFactura() {
-        return idFactura;
-    }
-
-    public void setIdFactura(int IDFactura) {
-        this.idFactura = IDFactura;
-    }
-
 
     public FacturaGenerada VerFactura(int idFactura) {
-        String sql = "DECLARE @TotalFacturaBs FLOAT;\n" +
-                "EXEC Ventas.ObtenerFacturaPorID @ID_Factura = ?, @TotalFacturaBs = @TotalFacturaBs OUTPUT;\n" +
-                "SELECT @TotalFacturaBs AS TotalFacturaBs;";
+        String sql = """
+                DECLARE @TotalFacturaBs FLOAT;
+                EXEC Ventas.ObtenerFacturaPorID @ID_Factura = ?, @TotalFacturaBs = @TotalFacturaBs OUTPUT;
+                SELECT @TotalFacturaBs AS TotalFacturaBs;""";
 
         FacturaGenerada factura = new FacturaGenerada();
         ArrayList<Producto> productos = new ArrayList<>();
@@ -98,13 +91,13 @@ public class VerFacturaModel {
                         if (rs4 != null) {
                             if (rs4.next()) {
                                 factura.setTotalBsFactura(rs4.getDouble("TotalFacturaBs"));
-                                factura.setTotalUSDFactura((rs4.getDouble("TotalFacturaBs") ) / GetCurrency.getCurrency().bcv());
+                                double USD = rs4.getDouble("TotalFacturaBs") / GetCurrency.getCurrency().bcv();
+                                BigDecimal TotalFacturaUSD = new BigDecimal(USD).setScale(2, RoundingMode.HALF_UP);
+                                factura.setTotalUSDFactura(TotalFacturaUSD.doubleValue());
                             }
-
                         }
                     }
                 }
-
                 // Asignar productos y métodos de pago a la factura
                 factura.setProducto(productos);
                 factura.setPago(metodosPago);
@@ -121,7 +114,6 @@ public class VerFacturaModel {
             alert.setHeaderText(null);
             alert.setContentText("Error al obtener la factura: " + e.getMessage());
             alert.showAndWait();
-            e.printStackTrace(); // Para depuración
         }
         return null;
     }

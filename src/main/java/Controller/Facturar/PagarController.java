@@ -13,13 +13,12 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Optional;
+
 
 public class PagarController {
     DashboardFacturarModel dashboardFacturarModel;
     ArrayList<Double> Totales = new ArrayList<>();
     ArrayList<String> MetodosPago = new ArrayList<>();
-    Double MontoPagado = 0.0;
     GetCurrency getCurrency = new GetCurrency();
     PagarModel Pagarmodel = new PagarModel();
     private double TotalUSD = 0.0;
@@ -43,14 +42,18 @@ public class PagarController {
     @FXML
     private Label TotalUSDTXT;
 
+    private void Alert (String titulo, String contenido, Alert.AlertType tipo) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(contenido);
+        alert.showAndWait();
+    }
+
     @FXML
     void BtnPagar() {
-       if (isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No se ha introducido el monto de pago");
-            alert.setContentText("El campo de monto de pago no puede estar vacío");
-            alert.showAndWait();
+      /* if (isEmpty()) {
+            Alert("Error", "El campo de monto de pago no puede estar vacío", Alert.AlertType.ERROR);
             return;
         }
 
@@ -76,10 +79,12 @@ public class PagarController {
             Totales.set(1, totalBs.doubleValue());
 
             // Actualizar las etiquetas
-            TotalUSDTXT.setText(totalUSD.toString() + " $");
-            TotalBsTXT.setText(totalBs.toString() + " Bs");
+            TotalUSDTXT.setText(totalUSD + " $");
+            TotalBsTXT.setText(totalBs + " Bs");
 
             // Verificar si el pago fue exitoso
+           Alert("Pendiente", " Pendiente por Pagar: " + totalBs + " bs", Alert.AlertType.CONFIRMATION);
+
 
            if (totalBs.doubleValue() == 0.00) {
                if (PagarFactura()) {
@@ -112,10 +117,11 @@ public class PagarController {
             Totales.set(1, totalBs.doubleValue());
 
             // Actualizar las etiquetas
-            TotalUSDTXT.setText(totalUSD2.toString() + " $");
-            TotalBsTXT.setText(totalBs.toString() + " Bs");
+            TotalUSDTXT.setText(totalUSD2 + " $");
+            TotalBsTXT.setText(totalBs + " Bs");
 
             // Verificar si el pago fue exitoso
+           Alert("Pendiente", " Pendiente por Pagar: " + totalUSD2 + " bs", Alert.AlertType.CONFIRMATION);
 
            if (totalUSD2.doubleValue() == 0.00) {
                if (PagarFactura()) {
@@ -126,7 +132,56 @@ public class PagarController {
                    mostrarAlerta("Error", "No se ha podido realizar el pago", "Ha ocurrido un error al realizar el pago", Alert.AlertType.ERROR);
                }
            }
-       }
+       }*/
+
+        if (isEmpty()) {
+            Alert("Error", "El campo de monto de pago no puede estar vacío", Alert.AlertType.ERROR);
+            return;
+        }
+
+        BigDecimal montoPagado = new BigDecimal(MontoPagadoTXT.getText()).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal totalBs = new BigDecimal(Totales.get(1).toString()).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal totalUSD = new BigDecimal(Totales.get(0).toString()).setScale(2, RoundingMode.HALF_UP);
+        AddMetodoPago(montoPagado);
+
+        if (VerificarTotales(TotalBS, TotalUSD)) {
+            TotalUSD = totalUSD.doubleValue();
+            TotalBS = totalBs.doubleValue();
+        }
+
+        if (MetodoPagoBs()) {
+            BigDecimal montoPagadoUSD = montoPagado.divide(BigDecimal.valueOf(getCurrency.getCurrency().bcv()), 2, RoundingMode.HALF_UP);
+            totalUSD = totalUSD.subtract(montoPagadoUSD).setScale(2, RoundingMode.HALF_UP);
+            Totales.set(0, totalUSD.doubleValue());
+
+            totalBs = totalBs.subtract(montoPagado).setScale(2, RoundingMode.HALF_UP);
+            Totales.set(1, totalBs.doubleValue());
+        } else if (MetodoPagoUSD()) {
+            totalUSD = totalUSD.subtract(montoPagado).setScale(2, RoundingMode.HALF_UP);
+            Totales.set(0, totalUSD.doubleValue());
+
+            montoPagado = montoPagado.multiply(BigDecimal.valueOf(getCurrency.getCurrency().bcv()));
+            totalBs = totalBs.subtract(montoPagado).setScale(2, RoundingMode.HALF_UP);
+            Totales.set(1, totalBs.doubleValue());
+        }
+
+        // Actualizar las etiquetas
+        TotalUSDTXT.setText(totalUSD + " $");
+        TotalBsTXT.setText(totalBs + " Bs");
+
+        // Verificar si el pago fue exitoso
+
+        if ((MetodoPagoBs() && totalBs.doubleValue() == 0.00) || (MetodoPagoUSD() && totalUSD.doubleValue() == 0.00)) {
+            if (PagarFactura()) {
+                mostrarAlerta("Pago Exitoso", "El pago se ha realizado con éxito", "El monto de pago es igual al total de la factura", Alert.AlertType.INFORMATION);
+                ((Stage) TotalBsTXT.getScene().getWindow()).close();
+                dashboardFacturarModel.setCleanALL(true);
+            } else {
+                mostrarAlerta("Error", "No se ha podido realizar el pago", "Ha ocurrido un error al realizar el pago", Alert.AlertType.ERROR);
+            }
+        } else {
+            Alert("Pendiente", "Pendiente por Pagar: " + (MetodoPagoBs() ? (totalBs + " Bs") : totalUSD + " $"), Alert.AlertType.CONFIRMATION);
+        }
     }
 
     private void AddMetodoPago(BigDecimal montoPagado) {
@@ -149,183 +204,6 @@ public class PagarController {
                 Objects.equals(ComboMetodoPago.getValue(), "Binance");
     }
 
-    private void nul() {
-        if (isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No se ha introducido el monto de pago");
-            alert.setContentText("El campo de monto de pago no puede estar vacío");
-            alert.showAndWait();
-            return;
-        }
-
-        if (Objects.equals(ComboMetodoPago.getValue(), "Pago Movil") ||
-                Objects.equals(ComboMetodoPago.getValue(), "Transferencia Bancaria") ||
-                Objects.equals(ComboMetodoPago.getValue(), "Efectivo Bolivares") ||
-                Objects.equals(ComboMetodoPago.getValue(), "Biopago") ||
-                Objects.equals(ComboMetodoPago.getValue(), "Punto de Venta")) {
-
-            // Obtener el monto pagado y los totales
-            BigDecimal montoPagado = new BigDecimal(MontoPagadoTXT.getText()).setScale(2, RoundingMode.HALF_UP);
-            BigDecimal totalBs = new BigDecimal(Totales.get(1).toString()).setScale(2, RoundingMode.HALF_UP);
-            BigDecimal totalUSDs = new BigDecimal(Totales.get(0).toString()).setScale(2, RoundingMode.HALF_UP);
-
-            BigDecimal montoPagadoUSD = montoPagado.divide(new BigDecimal(getCurrency.getCurrency().bcv()), 2, RoundingMode.HALF_UP);
-            BigDecimal totalUSD = new BigDecimal(Totales.get(0).toString()).setScale(2, RoundingMode.HALF_UP);
-            totalUSD = totalUSD.subtract(montoPagadoUSD).setScale(2, RoundingMode.HALF_UP);
-            Totales.set(0, totalUSD.doubleValue());
-
-            // Actualizar las etiquetas
-            TotalUSDTXT.setText(totalUSD.toString() + " $");
-            TotalBsTXT.setText(totalBs.toString() + " Bs");
-            // Inicializar TotalBS y TotalUSD si es necesario
-            if (TotalBS == 0.0 || TotalUSD == 0.0) {
-                TotalBS = totalBs.doubleValue();
-                TotalUSD = totalUSDs.doubleValue();
-            }
-
-            // Validar que el monto pagado no exceda el total en bolívares
-            if (montoPagado.compareTo(totalBs) > 0) {
-                mostrarAlerta("Error", "Monto excedido", "El monto pagado no puede ser mayor que el total pendiente en bolívares.", Alert.AlertType.ERROR);
-                return; // Detener la ejecución si el monto es mayor
-            }
-
-            // Verificar si el monto pagado es igual al total en bolívares
-            System.out.println(TotalBsTXT.getText().replace(" ", "").replace("Bs", ""));
-            if (Double.parseDouble(TotalBsTXT.getText().replace(" ", "").replace("Bs", "")) == 0.00) {
-                MetodosPago.add(ComboMetodoPago.getValue());
-                MetodosPago.add(montoPagado.toString());
-                MetodosPago.add(NroReferenciaTXT.getText());
-
-                // Restar el monto pagado del total en bolívares
-                totalBs = totalBs.subtract(montoPagado).setScale(2, RoundingMode.HALF_UP);
-                Totales.set(1, totalBs.doubleValue());
-
-                // Convertir el monto pagado a dólares y restarlo del total en dólares
-                montoPagadoUSD = montoPagado.divide(new BigDecimal(getCurrency.getCurrency().bcv()), 2, RoundingMode.HALF_UP);
-                totalUSD = new BigDecimal(Totales.get(0).toString()).setScale(2, RoundingMode.HALF_UP);
-                totalUSD = totalUSD.subtract(montoPagadoUSD).setScale(2, RoundingMode.HALF_UP);
-                Totales.set(0, totalUSD.doubleValue());
-
-                // Actualizar las etiquetas
-                TotalUSDTXT.setText(totalUSD.toString() + " $");
-                TotalBsTXT.setText(totalBs.toString() + " Bs");
-
-                // Verificar si el pago fue exitoso
-                if (PagarFactura()) {
-                    mostrarAlerta("Pago Exitoso", "El pago se ha realizado con éxito", "El monto de pago es igual al total de la factura", Alert.AlertType.INFORMATION);
-                    ((Stage) TotalBsTXT.getScene().getWindow()).close();
-                    dashboardFacturarModel.setCleanALL(true);
-                } else {
-                    mostrarAlerta("Error", "No se ha podido realizar el pago", "Ha ocurrido un error al realizar el pago", Alert.AlertType.ERROR);
-                }
-            } else {
-                // Si el monto pagado no es igual al total en bolívares
-                MetodosPago.add(ComboMetodoPago.getValue());
-                MetodosPago.add(montoPagado.toString());
-                MetodosPago.add(NroReferenciaTXT.getText());
-
-                // Restar el monto pagado del total en bolívares
-                totalBs = totalBs.subtract(montoPagado).setScale(2, RoundingMode.HALF_UP);
-                Totales.set(1, totalBs.doubleValue());
-
-                // Convertir el monto pagado a dólares y restarlo del total en dólares
-                montoPagadoUSD = montoPagado.divide(new BigDecimal(getCurrency.getCurrency().bcv()), 2, RoundingMode.HALF_UP);
-                totalUSD = new BigDecimal(Totales.get(0).toString()).setScale(2, RoundingMode.HALF_UP);
-                totalUSD = totalUSD.subtract(montoPagadoUSD).setScale(2, RoundingMode.HALF_UP);
-                Totales.set(0, totalUSD.doubleValue());
-
-                // Actualizar las etiquetas
-                TotalUSDTXT.setText(totalUSD.toString() + " $");
-                TotalBsTXT.setText(totalBs.toString() + " Bs");
-
-                // Mostrar alerta de pago pendiente
-                mostrarAlerta("Pago Pendiente", "Pendiente por Pagar", "Pendiente por Pagar: " + totalBs.toString() + " bs", Alert.AlertType.CONFIRMATION);
-            }
-        } else if (Objects.equals(ComboMetodoPago.getValue(), "Efectivo USD") ||
-                Objects.equals(ComboMetodoPago.getValue(), "Zinli") ||
-                Objects.equals(ComboMetodoPago.getValue(), "Binance")) {
-
-            // Obtener el monto pagado y los totales
-            BigDecimal montoPagado = new BigDecimal(MontoPagadoTXT.getText()).setScale(2, RoundingMode.HALF_UP);
-            BigDecimal totalUSD = new BigDecimal(Totales.get(0).toString()).setScale(2, RoundingMode.HALF_UP);
-            BigDecimal totalBs = new BigDecimal(Totales.get(1).toString()).setScale(2, RoundingMode.HALF_UP);
-            BigDecimal montoPagadoUSD = montoPagado.divide(new BigDecimal(getCurrency.getCurrency().bcv()), 2, RoundingMode.HALF_UP);
-            totalUSD = new BigDecimal(Totales.get(0).toString()).setScale(2, RoundingMode.HALF_UP);
-            totalUSD = totalUSD.subtract(montoPagadoUSD).setScale(2, RoundingMode.HALF_UP);
-            Totales.set(0, totalUSD.doubleValue());
-
-            // Actualizar las etiquetas
-            TotalUSDTXT.setText(totalUSD.toString() + " $");
-            TotalBsTXT.setText((totalBs.doubleValue() - Double.parseDouble(MontoPagadoTXT.getText())) + " Bs");
-            // Inicializar TotalBS y TotalUSD si es necesario
-            if (TotalBS == 0.0 || TotalUSD == 0.0) {
-                TotalBS = totalBs.doubleValue();
-                TotalUSD = totalUSD.doubleValue();
-            }
-
-            // Validar que el monto pagado no exceda el total en dólares
-            if (montoPagado.compareTo(totalUSD) > 0) {
-                mostrarAlerta("Error", "Monto excedido", "El monto pagado no puede ser mayor que el total pendiente en dólares.", Alert.AlertType.ERROR);
-                return; // Detener la ejecución si el monto es mayor
-            }
-
-            // Verificar si el monto pagado es igual al total en dólares
-            System.out.println(TotalUSDTXT.getText().replace(" ", "").replace("$", ""));
-            if (Double.parseDouble(TotalUSDTXT.getText().replace(" ", "").replace("$", "")) == 0.00) {
-                MetodosPago.add(ComboMetodoPago.getValue());
-                MetodosPago.add(montoPagado.toString());
-                MetodosPago.add(NroReferenciaTXT.getText());
-
-                // Convertir el monto pagado a bolívares y restarlo del total en bolívares
-                BigDecimal montoPagadoBs = montoPagado.multiply(new BigDecimal(getCurrency.getCurrency().bcv())).setScale(2, RoundingMode.HALF_UP);
-                totalBs = totalBs.subtract(montoPagadoBs).setScale(2, RoundingMode.HALF_UP);
-                Totales.set(1, totalBs.doubleValue());
-
-                // Restar el monto pagado del total en dólares
-                totalUSD = totalUSD.subtract(montoPagado).setScale(2, RoundingMode.HALF_UP);
-                Totales.set(0, totalUSD.doubleValue());
-
-                // Actualizar las etiquetas
-                TotalUSDTXT.setText(totalUSD.toString() + " $");
-                TotalBsTXT.setText(totalBs.toString() + " Bs");
-
-                // Verificar si el pago fue exitoso
-                if (PagarFactura()) {
-                    mostrarAlerta("Pago Exitoso", "El pago se ha realizado con éxito", "El monto de pago es igual al total de la factura", Alert.AlertType.INFORMATION);
-                    ((Stage) TotalBsTXT.getScene().getWindow()).close();
-                    dashboardFacturarModel.setCleanALL(true);
-                } else {
-                    mostrarAlerta("Error", "No se ha podido realizar el pago", "Ha ocurrido un error al realizar el pago", Alert.AlertType.ERROR);
-                }
-            } else {
-                // Si el monto pagado no es igual al total en dólares
-                MetodosPago.add(ComboMetodoPago.getValue());
-                MetodosPago.add(montoPagado.toString());
-                MetodosPago.add(NroReferenciaTXT.getText());
-
-                // Convertir el monto pagado a bolívares y restarlo del total en bolívares
-                BigDecimal montoPagadoBs = montoPagado.multiply(BigDecimal.valueOf(getCurrency.getCurrency().bcv())).setScale(2, RoundingMode.HALF_UP);
-                totalBs = totalBs.subtract(montoPagadoBs).setScale(2, RoundingMode.HALF_UP);
-                Totales.set(1, totalBs.doubleValue());
-
-                // Restar el monto pagado del total en dólares
-                totalUSD = totalUSD.subtract(montoPagado).setScale(2, RoundingMode.HALF_UP);
-                Totales.set(0, totalUSD.doubleValue());
-
-                // Actualizar las etiquetas
-                TotalUSDTXT.setText(totalUSD.toString() + " $");
-                TotalBsTXT.setText(totalBs.toString() + " Bs");
-
-                // Mostrar alerta de pago pendiente
-                mostrarAlerta("Pago Pendiente", "Pendiente por Pagar", "Pendiente por Pagar: " + totalBs.toString() + " bs", Alert.AlertType.CONFIRMATION);
-            }
-        } else {
-            // Si no se selecciona un método de pago válido
-            mostrarAlerta("Error", "Campos Vacíos", "Seleccione un método de pago", Alert.AlertType.ERROR);
-        }
-    }
-
     private boolean VerificarTotales(Double totalBs, Double totalUSD) {
         return totalBs == 0.00 && totalUSD == 0.00;
     }
@@ -338,48 +216,8 @@ public class PagarController {
         alert.showAndWait();
     }
 
-    private void CleanFields() {
-        ComboMetodoPago.setValue(null);
-        MontoPagadoTXT.setText("");
-        NroReferenciaTXT.setText("");
-        TotalBsTXT.setText("");
-        TotalUSDTXT.setText("");
-    }
-
     public boolean PagarFactura() {
-        System.out.println(TotalBS);
-        System.out.println(TotalUSD);
-        System.out.println(dashboardFacturarModel.GetProducto());
-        System.out.println(MetodosPago);
-        System.out.println(LocalDate.now().toString());
-        System.out.println(dashboardFacturarModel.getIDCliente());
         return Pagarmodel.insertarFacturaCompleta(dashboardFacturarModel.getIDCliente(), LocalDate.now().toString(), TotalBS,TotalUSD ,"Pagado", Pagarmodel.setDetallesFactura(dashboardFacturarModel.GetProducto()), Pagarmodel.setMetodosPago(MetodosPago));
-    }
-
-    private void Pagar() {
-        MontoPagado = Double.parseDouble(MontoPagadoTXT.getText());
-        if (MontoPagado <= 0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("No se ha introducido el monto de pago");
-            alert.setContentText("El monto de pago no puede ser menor a cero");
-            alert.showAndWait();
-            return;
-        }
-        MetodosPago.add(ComboMetodoPago.getValue());
-        MetodosPago.add(NroReferenciaTXT.getText());
-
-        Totales.set(1, Totales.get(1) - MontoPagado );
-        BigDecimal TotalBs = BigDecimal.valueOf(Totales.get(1));
-        TotalBs = TotalBs.setScale(2, RoundingMode.HALF_UP);
-
-        Totales.set(0, Totales.get(0) - (MontoPagado / getCurrency.getCurrency().bcv()));
-        BigDecimal TotalUSD = BigDecimal.valueOf(Totales.getFirst());
-        TotalUSD = TotalUSD.setScale(2, RoundingMode.HALF_UP);
-
-        TotalUSDTXT.setText(TotalUSD.toString() + " $");
-        TotalBsTXT.setText(TotalBs.toString() + " Bs");
-
     }
 
     private void Visible(boolean visible) {

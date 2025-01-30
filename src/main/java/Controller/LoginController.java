@@ -1,16 +1,9 @@
 package Controller;
 
 import Utils.OpenView;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-import java.util.Objects;
-
 import Service.AutenticacionService;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -18,9 +11,8 @@ import javafx.scene.input.KeyEvent;
 public class LoginController {
     AutenticacionService Auth = new AutenticacionService();
     OpenView Open = new OpenView();
-
-    @FXML
-    private ImageView ImageViewLogin;
+    private String Clave = "";
+    private String ClaveOculta = "";
 
     @FXML
     private TextField Userlbl;
@@ -28,89 +20,93 @@ public class LoginController {
     @FXML
     private TextField passwordlbl;
 
-    private void Login(String usuario, String password) throws Exception {
-        Auth = new AutenticacionService();
-        if (Auth.Login(usuario, password)) {
-            if (Auth.tieneRol(Auth.GetID(usuario), "Administrador")) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Login exitoso");
-                alert.setHeaderText(null);
-                alert.setContentText("Bienvenido de Nuevo, " + usuario + " [Administrador]");
-                alert.showAndWait();
-                Open.Dashboard(Userlbl);
-            } else if (Auth.tieneRol(Auth.GetID(usuario), "Supervisor")) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Login exitoso");
-                alert.setHeaderText(null);
-                alert.setContentText("Bienvenido de Nuevo, " + usuario + " [Supervisor]");
-                alert.showAndWait();
-                Open.Dashboard(Userlbl);
-
-            } else if (Auth.tieneRol(Auth.GetID(usuario), "Empleado")) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Login exitoso");
-                alert.setHeaderText(null);
-                alert.setContentText("Bienvenido de Nuevo, " + usuario + " [Empleado]");
-                alert.showAndWait();
-                Open.Dashboard(Userlbl);
-
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("Bienvenido de Nuevo, " + usuario + " [Indefinido]");
-                alert.showAndWait();
-                Open.Dashboard(Userlbl);
-            }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Usuario o contraseña incorrectos");
-            alert.showAndWait();
-        }
-
+    private void Alerta(String titulo, String contenido, Alert.AlertType tipo) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(contenido);
+        alert.showAndWait();
     }
 
+    private void Login(String usuario, String password) throws Exception {
+
+        if (Auth.Login(usuario, password)) {
+            int rol = Auth.GetID(usuario);
+            String mensaje;
+            if (Auth.tieneRol(rol, "Administrador")) {
+                mensaje = "Bienvenido de Nuevo, " + usuario + " [Administrador]";
+            } else if (Auth.tieneRol(rol, "Supervisor")) {
+                mensaje = "Bienvenido de Nuevo, " + usuario + " [Supervisor]";
+            } else if (Auth.tieneRol(rol, "Empleado")) {
+                mensaje = "Bienvenido de Nuevo, " + usuario + " [Empleado]";
+            } else {
+                mensaje = "Rol Indefinido";
+                Alerta("Error", mensaje, Alert.AlertType.ERROR);
+                return;
+            }
+            Alerta("Login exitoso", mensaje, Alert.AlertType.INFORMATION);
+            Open.Dashboard(Userlbl);
+        } else {
+            Alerta("Error", "Usuario o contraseña incorrectos", Alert.AlertType.ERROR);
+        }
+    }
+
+    private boolean isEmpty() {
+        return (Userlbl.getText().isEmpty() || passwordlbl.getText().isEmpty());
+    }
 
     @FXML
-    void BtnLogin(ActionEvent event) throws Exception {
-
-        if (Userlbl.getText().isEmpty() || passwordlbl.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Debe rellenar los campos de usuario y contraseña");
-            alert.showAndWait();
+    void BtnLogin() throws Exception {
+        if (isEmpty()) {
+            Alerta("Error", "Debe rellenar los campos de usuario y contraseña",Alert.AlertType.ERROR);
         } else {
-            Login(Userlbl.getText(), passwordlbl.getText());
+            if (Clave.isEmpty()){
+                Login(Userlbl.getText(), passwordlbl.getText());
+
+            } else {
+                Login(Userlbl.getText(), Clave);
+            }
         }
     }
 
-
-
-    private void handleKeyPress(KeyEvent event) {
-        switch (event.getCode()) {
-            case ENTER:
-                System.out.println("Se presionó ENTER");
-                break;
-            case ESCAPE:
-                System.out.println("Se presionó ESCAPE");
-                break;
-            case A:
-                if (event.isControlDown()) {
-                    System.out.println("Se presionó CTRL + A");
+    private void AddKeyListeners() {
+        Userlbl.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    BtnLogin();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
-                break;
-            default:
-                System.out.println("Tecla presionada: " + event.getCode());
-                break;
+            }
+        });
+        passwordlbl.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    BtnLogin();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    private String OcultarPassword(String texto) {
+        return "*".repeat(texto.length());
+    }
+
+    @FXML
+    void OcultarContrasena() {
+        if (passwordlbl.getText().equals(ClaveOculta)) {
+            passwordlbl.setText(Clave);
+        } else {
+            Clave = passwordlbl.getText();
+            ClaveOculta = OcultarPassword(Clave);
+            passwordlbl.setText(ClaveOculta);
         }
     }
 
-
-    void intialize() {
-        Userlbl.setOnKeyPressed(this::handleKeyPress);
-
+    @FXML
+    void initialize() {
+        AddKeyListeners();
     }
 }

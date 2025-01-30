@@ -3,19 +3,14 @@ package Controller;
 import Utils.OpenView;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
-import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
-
-import java.awt.event.KeyEvent;
+import javafx.stage.Stage;
 
 public class DashboardController {
     OpenView Open = new OpenView();
 
     @FXML
     private AnchorPane archonPane;
-
-    @FXML
-    private TitledPane titlePane;
 
     @FXML
     void Inventario() throws Exception {
@@ -38,44 +33,44 @@ public class DashboardController {
     }
 
     @FXML
-    void Monedas() throws Exception {
-        Open.DashboardMonedas();
-    }
-
-    private void KeyPressed(KeyEvent event) throws Exception {
-        if (event.getSource() == KeyCode.F) {
-            Open.DashboardFacturas();
-        }
-    }
-
-    @FXML
     public void ActionPane(javafx.scene.input.KeyEvent keyEvent) throws Exception {
-        if (keyEvent.getCode() == KeyCode.ENTER) {
-            Open.DashboardFacturas();
-        } else if (keyEvent.getCode() == KeyCode.F) {
-            Open.DashboardFacturas();
-        } else if (keyEvent.getCode() == KeyCode.M) {
-            Open.DashboardMonedas();
-        } else if (keyEvent.getCode() == KeyCode.C) {
-            Open.DashboardClientes();
-        } else if (keyEvent.getCode() == KeyCode.A) {
-            Open.DashboardInventario();
+        switch (keyEvent.getCode()) {
+            case E:
+                if (keyEvent.isControlDown() || keyEvent.isAltDown()) Open.DashboardFacturar();
+                break;
+            case F:
+                if (keyEvent.isControlDown() || keyEvent.isAltDown()) Open.DashboardFacturas();
+                break;
+            case M:
+                if (keyEvent.isControlDown() || keyEvent.isAltDown()) Open.DashboardMonedas();
+                break;
+            case C:
+                if (keyEvent.isControlDown() || keyEvent.isAltDown()) Open.DashboardClientes();
+                break;
+            case I:
+                if (keyEvent.isControlDown() || keyEvent.isAltDown()) Open.DashboardInventario();
+                break;
+            case S:
+            case ESCAPE:
+                if (keyEvent.isControlDown() || keyEvent.isAltDown() || keyEvent.getCode() == KeyCode.ESCAPE) {
+                    Open.Login();
+                    ((Stage) archonPane.getScene().getWindow()).close();
+                }
+                break;
+            default:
+                break;
         }
     }
 
     @FXML
-    public void TitleAction(javafx.scene.input.KeyEvent keyEvent) throws Exception {
+    void CerrarSesion() throws Exception {
+        Open.Login();
+        ((Stage) archonPane.getScene().getWindow()).close();
     }
-
 
     @FXML
-    void initialize () throws Exception {
+    void initialize () {
         archonPane.setFocusTraversable(true);
-
-        // Establecer el foco en el ArchonPane al iniciar
         archonPane.requestFocus();
-
     }
-
-
 }
