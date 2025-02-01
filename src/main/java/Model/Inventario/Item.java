@@ -1,6 +1,6 @@
 package Model.Inventario;
 
-public class ReporteInventario {
+public class Item {
     int ID;
     String Nombre;
     double Cantidad;
@@ -8,7 +8,7 @@ public class ReporteInventario {
     double PrecioUnitarioUSD;
     double ValorTotal;
 
-    public ReporteInventario(int ID, String Nombre, double Cantidad, double PrecioUnitarioBs, double PrecioUnitarioUSD, double ValorTotal) {
+    public Item(int ID, String Nombre, double Cantidad, double PrecioUnitarioBs, double PrecioUnitarioUSD, double ValorTotal) {
         this.ID = ID;
         this.Nombre = Nombre;
         this.Cantidad = Cantidad;

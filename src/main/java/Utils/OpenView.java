@@ -1,13 +1,19 @@
 package Utils;
 
+import Controller.Cliente.DashboardClientesController;
+import Controller.DashboardController;
 import Controller.Facturar.DashboardFacturarController;
 import Controller.Facturar.PagarController;
+import Controller.Facturas.DasboardFacturasController;
 import Controller.Facturas.VerFacturaCotroller;
+import Controller.Inventario.DashboardInventarioController;
 import Controller.Inventario.ElegirProductoController;
 import Model.Facturar.DashboardFacturarModel;
 import Model.Facturas.FacturasModel;
+import Model.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -27,12 +33,16 @@ public class OpenView {
         stage.show();
     }
 
-    public void Dashboard(TextField btn) throws Exception {
+    public void Dashboard(TextField btn, User user) throws Exception {
         Stage currentStage = (Stage) btn.getScene().getWindow();
         currentStage.close();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.Dashboard));
         AnchorPane pane = loader.load();
+
+        DashboardController DashboardController = loader.getController();
+        DashboardController.initialize(user);
+
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DashboardCSS)).toExternalForm());
@@ -51,9 +61,12 @@ public class OpenView {
         stage.show();
     }
 
-    public void DashboardInventario() throws Exception {
+    public void DashboardInventario(User user) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.DashboardInventario));
         AnchorPane pane = loader.load();
+        DashboardInventarioController DashboardInventarioController = loader.getController();
+        DashboardInventarioController.initialize(user);
+
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DashboardInventarioCSS)).toExternalForm());
@@ -121,13 +134,14 @@ public class OpenView {
         stage.show();
     }
 
-    public void DashboardFacturar() throws Exception {
+    public void DashboardFacturar(User user) throws Exception {
         DashboardFacturarModel DashboardFacturarmodel = new DashboardFacturarModel();
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.DashboardFacturar));
         AnchorPane pane = loader.load();
 
         DashboardFacturarController FacturarController = loader.getController();
-        FacturarController.initialize(DashboardFacturarmodel);
+        FacturarController.initialize(DashboardFacturarmodel,user);
+
 
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
@@ -136,9 +150,12 @@ public class OpenView {
         stage.show();
     }
 
-    public void DashboardFacturas() throws Exception {
+    public void DashboardFacturas(User user) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.DashboardFacturas));
         AnchorPane pane = loader.load();
+
+        DasboardFacturasController DashboardFacturasController = loader.getController();
+        DashboardFacturasController.initialize(user);
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DashboardFacturasCSS)).toExternalForm());
@@ -146,9 +163,13 @@ public class OpenView {
         stage.show();
     }
 
-    public void DashboardClientes() throws Exception {
+    public void DashboardClientes(User user) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.DashboardClientes));
         AnchorPane pane = loader.load();
+
+        DashboardClientesController DashboardClientesController = loader.getController();
+        DashboardClientesController.initialize(user);
+
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.DashboardClientesCSS)).toExternalForm());
@@ -246,7 +267,11 @@ public class OpenView {
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException e) {
-                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("No se pudo cargar el archivo: " + e.getMessage());
+                alert.showAndWait();
             }
     }
 

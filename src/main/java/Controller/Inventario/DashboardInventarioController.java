@@ -1,43 +1,68 @@
 package Controller.Inventario;
 
+import Model.User;
 import Utils.OpenView;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 
 public class DashboardInventarioController {
     OpenView Open = new OpenView();
+    User user;
 
+
+    private boolean isAdmin() {
+        return user.getRol().equals("Administrador");
+    }
 
     @FXML
-    void AgregarProducto(MouseEvent event) throws Exception {
+    void AgregarProducto() throws Exception {
         Open.AddProduct();
     }
 
     @FXML
-    void Modificar(MouseEvent event) throws Exception {
-        Open.ModificarProducto();
+    void Modificar() throws Exception {
+        if (isAdmin()) {
+            Open.ModificarProducto();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No tiene permisos para modificar productos");
+            alert.showAndWait();
+        }
     }
 
     @FXML
-    void Eliminar(MouseEvent event) throws Exception {
-        Open.EliminarProducto();
+    void Eliminar() throws Exception {
+        if (isAdmin()) {
+            Open.EliminarProducto();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No tiene permisos para eliminar productos");
+            alert.showAndWait();
+        }
     }
 
     @FXML
-    void Ver(MouseEvent event) throws Exception {
+    void Ver() throws Exception {
         Open.VerInventario();
     }
 
     @FXML
-    void Buscar(MouseEvent event) throws Exception {
+    void Buscar() throws Exception {
         Open.BuscarProducto();
     }
 
     @FXML
-    void TasaDolar(MouseEvent event) throws Exception {
+    void TasaDolar() throws Exception {
         Open.Dolar();
     }
 
-
-
+    @FXML
+    public void initialize(User user) {
+        this.user = user;
+    }
 }

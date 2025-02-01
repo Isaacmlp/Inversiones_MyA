@@ -3,10 +3,10 @@ package Controller.Facturar;
 import Model.Cliente.ModificarClienteModel;
 import Model.Facturar.DashboardFacturarModel;
 import Model.Facturar.ProductoFactura;
+import Model.User;
 import Utils.OpenView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -219,7 +219,7 @@ public class DashboardFacturarController {
     }
 
     @FXML
-    public void initialize(DashboardFacturarModel dasboardFacturarModel) {
+    public void initialize(DashboardFacturarModel dasboardFacturarModel, User user) {
         this.DasboardFacturar = dasboardFacturarModel;
         KeyEventCliente();
         TimelineTest();

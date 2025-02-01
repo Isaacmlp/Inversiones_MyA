@@ -2,6 +2,7 @@ package Controller.Facturas;
 
 import Model.Facturas.Factura;
 import Model.Facturas.FacturasModel;
+import Model.User;
 import Utils.OpenView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -173,7 +174,7 @@ public class DasboardFacturasController {
     }
 
     @FXML
-    void initialize() {
+    public void initialize(User user) {
         IsVisible(false);
         //Facturas.CargarFacturasTabla(NumeroFacturaColumn, CedulaClienteColumn, EstadoFacturaColumn, FechaFacturaColumn, TotalBsFacturaColumn, TotalUSDFacturaColumn,TablaProductos);
     }

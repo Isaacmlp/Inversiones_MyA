@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.User;
 import Utils.OpenView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,6 +14,7 @@ public class LoginController {
     OpenView Open = new OpenView();
     private String Clave = "";
     private String ClaveOculta = "";
+    User user = new User();
 
     @FXML
     private TextField Userlbl;
@@ -35,17 +37,23 @@ public class LoginController {
             String mensaje;
             if (Auth.tieneRol(rol, "Administrador")) {
                 mensaje = "Bienvenido de Nuevo, " + usuario + " [Administrador]";
+                user.setRol("Administrador");
+                user.setUsername(usuario);
             } else if (Auth.tieneRol(rol, "Supervisor")) {
                 mensaje = "Bienvenido de Nuevo, " + usuario + " [Supervisor]";
+                user.setRol("Supervisor");
+                user.setUsername(usuario);
             } else if (Auth.tieneRol(rol, "Empleado")) {
                 mensaje = "Bienvenido de Nuevo, " + usuario + " [Empleado]";
+                user.setRol("Empleado");
+                user.setUsername(usuario);
             } else {
                 mensaje = "Rol Indefinido";
                 Alerta("Error", mensaje, Alert.AlertType.ERROR);
                 return;
             }
             Alerta("Login exitoso", mensaje, Alert.AlertType.INFORMATION);
-            Open.Dashboard(Userlbl);
+            Open.Dashboard(Userlbl,user);
         } else {
             Alerta("Error", "Usuario o contraseña incorrectos", Alert.AlertType.ERROR);
         }

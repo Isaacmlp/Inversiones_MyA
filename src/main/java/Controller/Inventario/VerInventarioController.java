@@ -34,6 +34,11 @@ public class VerInventarioController {
     @FXML
     private TextField BuscarProductoTXT;
 
+    @FXML
+    void DescargarInventario() {
+
+    }
+
 
     private void KeyPressed() {
         BuscarProductoTXT.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
