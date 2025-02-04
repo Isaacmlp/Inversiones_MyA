@@ -144,7 +144,7 @@ public class VerInventarioModel {
 
     public Inventario GetAllInventario() {
         double valorTotal = 0.0;
-        int totalProductos = 0;
+        int totalProductos;
         try (Connection connection = Conect.Conect();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM Inventario.Producto")
         ) {

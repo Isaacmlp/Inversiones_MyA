@@ -18,45 +18,10 @@ public class Inventario {
         this.Usuario = Usuario;
     }
 
-    public List<Item> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Item> productos) {
-        this.productos = productos;
-    }
-
-    public double getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public double getTotalProductos() {
-        return totalProductos;
-    }
-
-    public void setTotalProductos(double totalProductos) {
-        this.totalProductos = totalProductos;
-    }
 
     public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-
-    }
-
-    public String getUsuario() {
-        return Usuario;
-    }
-
-    public void setUsuario(String Usuario) {
-        this.Usuario = Usuario;
-    }
 
 }
