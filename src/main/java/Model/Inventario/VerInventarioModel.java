@@ -18,10 +18,6 @@ public class VerInventarioModel {
     ConectBD Conect = new ConectBD();
     String NombreUsuario;
 
-    public String getNombreUsuario() {
-        return NombreUsuario;
-    }
-
     public void setNombreUsuario(String NombreUsuario) {
         this.NombreUsuario = NombreUsuario;
     }
