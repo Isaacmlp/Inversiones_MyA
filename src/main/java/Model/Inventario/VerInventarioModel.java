@@ -1,6 +1,5 @@
 package Model.Inventario;
 
-import Model.Inventario.Producto;
 import Utils.ConectBD;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,11 +11,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class VerInventarioModel {
     ConectBD Conect = new ConectBD();
+    String NombreUsuario;
 
+    public String getNombreUsuario() {
+        return NombreUsuario;
+    }
+
+    public void setNombreUsuario(String NombreUsuario) {
+        this.NombreUsuario = NombreUsuario;
+    }
 
     public void cargarInventarioTabla(TableColumn<Producto, String> NombreProducto, TableColumn<Producto, String> Descripcion, TableColumn<Producto, String> Cantidad, TableColumn<Producto, String> PrecioVentaUSD, TableColumn<Producto, String> PrecioVentaBS, TableView<Producto> TablaInventario) {
         // Configurar las columnas
@@ -41,11 +49,12 @@ public class VerInventarioModel {
         // Cargar los datos del vehículo
         CargarInventario(TablaInventario, BuscarProductoTXT);
     }
+
     public void CargarInventario(TableView<Producto> TablaInventario) {
         ArrayList<String> Product = BuscarProducto();
         ObservableList<Producto> datos = FXCollections.observableArrayList();
 
-        for (int i = 0 ; i < Product.size(); i += 7) {
+        for (int i = 0; i < Product.size(); i += 7) {
 
             Producto producto = new Producto(
                     Product.get(i), // Nombre
@@ -66,7 +75,7 @@ public class VerInventarioModel {
         ArrayList<String> Product = BuscarProducto(BuscarProductoTXT);
         ObservableList<Producto> datos = FXCollections.observableArrayList();
 
-        for (int i = 0 ; i < Product.size(); i += 7) {
+        for (int i = 0; i < Product.size(); i += 7) {
 
             Producto producto = new Producto(
                     Product.get(i), // Nombre
@@ -85,8 +94,7 @@ public class VerInventarioModel {
     }
 
 
-
-    public ArrayList<String> BuscarProducto () {
+    public ArrayList<String> BuscarProducto() {
         ArrayList<String> Producto = new ArrayList<>();
 
         try (Connection connection = Conect.Conect();
@@ -110,7 +118,7 @@ public class VerInventarioModel {
         }
     }
 
-    public ArrayList<String> BuscarProducto (String BuscarProductoTXT) {
+    public ArrayList<String> BuscarProducto(String BuscarProductoTXT) {
         ArrayList<String> Producto = new ArrayList<>();
 
         try (Connection connection = Conect.Conect();
@@ -133,6 +141,30 @@ public class VerInventarioModel {
             throw new RuntimeException(e);
         }
     }
+
+    public Inventario GetAllInventario() {
+        double valorTotal = 0.0;
+        int totalProductos = 0;
+        try (Connection connection = Conect.Conect();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Inventario.Producto")
+        ) {
+            ResultSet resultSet = statement.executeQuery();
+            ArrayList<Item> Producto = new ArrayList<>();
+            while (resultSet.next()) {
+                Producto.add(new Item(resultSet.getInt("IDProducto"), resultSet.getString("Nombre"), resultSet.getDouble("Cantidad"), resultSet.getDouble("Precio_Costo_USD"), resultSet.getDouble("Precio_Costo_BS"),(resultSet.getDouble("Cantidad") *resultSet.getDouble("Precio_Costo_BS"))));
+            }
+            totalProductos = Producto.size();
+            for (Item item : Producto) {
+                valorTotal += item.getValorTotal();
+            }
+
+            return new Inventario(Producto, valorTotal, totalProductos, LocalDate.now(), NombreUsuario);
+
+        } catch (RuntimeException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+   }
+
 }
 
 

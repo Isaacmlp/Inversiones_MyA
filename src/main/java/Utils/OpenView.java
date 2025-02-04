@@ -8,6 +8,7 @@ import Controller.Facturas.DasboardFacturasController;
 import Controller.Facturas.VerFacturaCotroller;
 import Controller.Inventario.DashboardInventarioController;
 import Controller.Inventario.ElegirProductoController;
+import Controller.Inventario.VerInventarioController;
 import Model.Facturar.DashboardFacturarModel;
 import Model.Facturas.FacturasModel;
 import Model.User;
@@ -94,9 +95,13 @@ public class OpenView {
         stage.show();
     }
 
-    public void VerInventario() throws Exception {
+    public void VerInventario(User user) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.VerInventario));
         AnchorPane pane = loader.load();
+
+        VerInventarioController VerInventarioController = loader.getController();
+        VerInventarioController.initialize(user);
+
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.VerInventarioCSS)).toExternalForm());

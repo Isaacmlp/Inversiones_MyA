@@ -4,12 +4,10 @@ import Model.User;
 import Utils.OpenView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.input.MouseEvent;
 
 public class DashboardInventarioController {
     OpenView Open = new OpenView();
     User user;
-
 
     private boolean isAdmin() {
         return user.getRol().equals("Administrador");
@@ -48,7 +46,7 @@ public class DashboardInventarioController {
 
     @FXML
     void Ver() throws Exception {
-        Open.VerInventario();
+        Open.VerInventario(user);
     }
 
     @FXML

@@ -25,6 +25,6 @@
         </columns>
       </TableView>
       <TextField fx:id="BuscarProductoTXT" layoutX="417.0" layoutY="101.0" prefHeight="53.0" prefWidth="566.0" />
-      <Button layoutX="594.0" layoutY="569.0" mnemonicParsing="false" onAction="#DescargarInventario" prefHeight="53.0" prefWidth="211.0" text="Descargar Inventario" />
+      <Button fx:id="BtnDescargar" layoutX="594.0" layoutY="569.0" mnemonicParsing="false" onAction="#DescargarInventario" prefHeight="53.0" prefWidth="211.0" text="Descargar Inventario" />
    </children>
 </AnchorPane>

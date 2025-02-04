@@ -1,7 +1,7 @@
 package Model;
 
 import Model.Facturas.FacturaGenerada;
-import Model.Inventario.Item;
+import Model.Inventario.Inventario;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -38,7 +38,7 @@ public class GenerateHTML {
         return templateEngine.process("FacturaPlantilla", context);
     }
 
-    public static String generarReporte(Item reporteInventario) {
+    public static String generarReporte(Inventario reporteInventario) {
 
         // Configurar el motor de plantillas de Thymeleaf
         ClassLoaderTemplateResolver resolver = new ClassLoaderTemplateResolver();
@@ -53,7 +53,7 @@ public class GenerateHTML {
         // Crear un contexto y agregar los datos
         Context context = new Context();
 
-        context.setVariable("reporteInventario", reporteInventario);
+        context.setVariable("inventario", reporteInventario);
 
         // Procesar la plantilla
         StringWriter writer = new StringWriter();

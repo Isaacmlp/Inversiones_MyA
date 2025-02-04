@@ -76,10 +76,10 @@
 
     <div class="header-info">
         <div>
-            <strong>Fecha del reporte:</strong> <span th:text="${fechaReporte}">2023-10-01</span>
+            <strong>Fecha del reporte:</strong> <span th:text="${inventario.fecha}">2023-10-01</span>
         </div>
         <div>
-            <strong>Generado por:</strong> Sistema de Inventarios
+            <strong>Generado por:</strong> <span th:text="${inventario.Usuario}">Sistema de Inventarios</span>
         </div>
     </div>
 
@@ -89,29 +89,30 @@
             <th>ID</th>
             <th>Nombre del Producto</th>
             <th>Cantidad</th>
-            <th>Precio Unitario</th>
+            <th>Precio Unitario USD</th>
+            <th>Precio Unitario Bs</th>
             <th>Valor Total</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="item : ${inventario}">
-            <td th:text="${item.id}">1</td>
-            <td th:text="${item.nombre}">Producto Ejemplo</td>
-            <td th:text="${item.cantidad}">10</td>
-            <td th:text="${'$' + item.precioUnitario}">$50.00</td>
-            <td th:text="${'$' + item.valorTotal}">$500.00</td>
+        <tr th:each="Item : ${inventario.productos}">
+            <td th:text="${Item.ID}">1</td>
+            <td th:text="${Item.Nombre}">Producto Ejemplo</td>
+            <td th:text="${Item.Cantidad}">10</td>
+            <td th:text="${'$' + Item.PrecioUnitarioBs}">$50.00</td>
+            <td th:text="${'Bs ' + Item.PrecioUnitarioUSD}">$50.00</td>
+            <td th:text="${'Bs ' + Item.ValorTotal}">$500.00</td>
         </tr>
         </tbody>
     </table>
 
     <div class="totals">
-        <p><strong>Total de productos en inventario:</strong> <span th:text="${totalProductos}">100</span></p>
-        <p><strong>Valor total del inventario:</strong> <span th:text="${'$' + valorTotalInventario}">$5000.00</span></p>
+        <p><strong>Total de productos en inventario:</strong> <span th:text="${inventario.totalProductos}">100</span></p>
+        <p><strong>Valor total del inventario:</strong> <span th:text="${'Bs ' + inventario.valorTotal}">$5000.00</span></p>
     </div>
 
     <div class="footer">
-        <p>Este reporte fue generado automáticamente por el Sistema de Inventarios.</p>
-        <p>&copy; 2023 Empresa XYZ. Todos los derechos reservados.</p>
+        <p>Este reporte fue generado automáticamente por el Sistema de Inventarios MyA.</p>
     </div>
 </div>
 </body>
