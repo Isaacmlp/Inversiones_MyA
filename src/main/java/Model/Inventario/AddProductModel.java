@@ -6,7 +6,6 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
 import static java.lang.Double.parseDouble;
-import static java.lang.Integer.parseInt;
 
 public class AddProductModel {
     GetCurrency Price = new GetCurrency();
@@ -59,7 +58,7 @@ public class AddProductModel {
         String Nombre = "'"+NombreProducto+"%'";
         System.out.println(Nombre);
         try (Connection connection = con.Conect();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Producto WHERE Nombre LIKE ?");
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Producto WHERE Nombre LIKE ?")
         ) {
             preparedStatement.setString(1,NombreProducto + "%");
 

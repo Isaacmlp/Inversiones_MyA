@@ -7,6 +7,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -151,10 +153,13 @@ public class VerInventarioModel {
             }
             totalProductos = Producto.size();
             for (Item item : Producto) {
-                valorTotal += item.getValorTotal();
+                BigDecimal valorPorProducto = BigDecimal.valueOf(item.getValorTotal()).setScale(2, RoundingMode.HALF_UP);
+                valorTotal += valorPorProducto.doubleValue();
             }
 
-            return new Inventario(Producto, valorTotal, totalProductos, LocalDate.now(), NombreUsuario);
+            BigDecimal ValorTotal = new BigDecimal(valorTotal).setScale(2, RoundingMode.HALF_UP);
+
+            return new Inventario(Producto, ValorTotal, totalProductos, LocalDate.now(), NombreUsuario);
 
         } catch (RuntimeException | SQLException e) {
             throw new RuntimeException(e);
