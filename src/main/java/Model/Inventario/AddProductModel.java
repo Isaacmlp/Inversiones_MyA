@@ -1,8 +1,6 @@
 package Model.Inventario;
 import Utils.ConectBD;
 import Utils.GetCurrency;
-
-import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
 import static java.lang.Double.parseDouble;
