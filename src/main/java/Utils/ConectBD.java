@@ -18,8 +18,6 @@ public class ConectBD {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(URL, User, Password);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-
             return connection;
         } catch (ClassNotFoundException | SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

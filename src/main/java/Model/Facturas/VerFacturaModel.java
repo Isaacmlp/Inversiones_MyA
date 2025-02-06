@@ -59,7 +59,7 @@ public class VerFacturaModel {
                                 producto.setDetalleFacturaID(rs2.getInt("DetalleFacturaID"));
                                 producto.setIDProducto(rs2.getInt("ProductoID"));
                                 producto.setNombreProducto(rs2.getString("NombreProducto"));
-                                producto.setCantidad(rs2.getInt("Cantidad"));
+                                producto.setCantidad(rs2.getDouble("Cantidad"));
                                 producto.setPrecioUnitarioBs(rs2.getDouble("PrecioUnitarioBs"));
                                 producto.setPrecioUnitarioUSD(rs2.getDouble("PrecioUnitarioUSD"));
                                 producto.setSubTotalBs(rs2.getDouble("SubTotalBs"));
