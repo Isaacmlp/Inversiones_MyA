@@ -20,6 +20,12 @@ public class AddProductController {
     private TextField txtDescripcionProducto;
 
     @FXML
+    private ComboBox<String> ComboIVA;
+
+    @FXML
+    private TextField TxtPrecioCosto;
+
+    @FXML
     private TextField txtNombreProducto;
 
     @FXML
@@ -64,6 +70,9 @@ public class AddProductController {
         txtUnidadesProducto.setText("");
         TxtPrecioCostoBs.setText("");
         txtPrecioVentaBs.setText("");
+        ComboIVA.setValue("Seleccione");
+        ComboPorcentaje.setValue("0%");
+        TxtPrecioCosto.setText("");
     }
 
     @FXML
@@ -85,8 +94,22 @@ public class AddProductController {
     }
 
     @FXML
+    void CalcularIVA(ActionEvent event) {
+        if (event.getSource() == ComboIVA) {
+            if (ComboIVA.getValue().equals("Si")) {
+                TxtPrecioCostoBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCosto.getText()) * 1.16 )));
+            } else if (ComboIVA.getValue().equals("Excento")) {
+                txtNombreProducto.setText(txtNombreProducto.getText() + " (E)");
+                TxtPrecioCostoBs.setText(TxtPrecioCosto.getText());
+            }
+        }
+    }
+
+    @FXML
     void initialize() {
         ComboPorcentaje.getItems().addAll("5%","10%","15%","20%","25%","30%","35%","40%","45%","50%");
+        ComboIVA.getItems().addAll("Si","Excento");
+        TxtPrecioCostoBs.setEditable(false);
     }
 
 }
