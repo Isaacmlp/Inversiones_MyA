@@ -59,6 +59,17 @@ public class ModificarProductoController {
 
     }
 
+    private void BuscarCliente(ArrayList<String> Producto) {
+        NombreProductoTXT.setText(Producto.get(0));
+        DescripcionTXT.setText(Producto.get(1));
+        CantidadTXT.setText(Producto.get(2));
+        PrecioCostUSDTXT.setText(Producto.get(3));
+        PrecioCostoBSTXT.setText(Producto.get(4));
+        PrecioVentaBSTXT.setText(Producto.get(6));
+        PrecioVentaUSDTXT.setText(Producto.get(5));
+        ID = Producto.get(7);
+    }
+
     @FXML
     void BtnGuardarCambios(ActionEvent event) {
         if (IsEmptyFields()) {
@@ -100,5 +111,11 @@ public class ModificarProductoController {
     private boolean IsEmptyFields() {
         return (NombreProductoTXT.getText().isEmpty() || DescripcionTXT.getText().isEmpty() || CantidadTXT.getText().isEmpty() || PrecioCostUSDTXT.getText().isEmpty() || PrecioCostoBSTXT.getText().isEmpty() || PrecioVentaBSTXT.getText().isEmpty() || PrecioVentaUSDTXT.getText().isEmpty());
 
+    }
+
+    @FXML
+    public void initialize(ArrayList<String> Producto) {
+
+        BuscarCliente(Producto);
     }
 }

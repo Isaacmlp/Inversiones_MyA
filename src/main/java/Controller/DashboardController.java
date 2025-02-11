@@ -21,7 +21,7 @@ public class DashboardController {
 
     @FXML
     void Inventario() throws Exception {
-        Open.DashboardInventario(user);
+        Open.VerInventario(user);
     }
 
     @FXML
@@ -75,7 +75,7 @@ public class DashboardController {
                 if (keyEvent.isControlDown() || keyEvent.isAltDown()) Open.DashboardClientes(user);
                 break;
             case I:
-                if (keyEvent.isControlDown() || keyEvent.isAltDown()) Open.DashboardInventario(user);
+                if (keyEvent.isControlDown() || keyEvent.isAltDown()) Open.VerInventario(user);
                 break;
             case S:
             case ESCAPE:

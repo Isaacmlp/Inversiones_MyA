@@ -21,7 +21,7 @@ public class DashboardInventarioController {
     @FXML
     void Modificar() throws Exception {
         if (isAdmin()) {
-            Open.ModificarProducto();
+           // Open.ModificarProducto();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");

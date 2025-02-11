@@ -8,6 +8,7 @@ import Controller.Facturas.DasboardFacturasController;
 import Controller.Facturas.VerFacturaCotroller;
 import Controller.Inventario.DashboardInventarioController;
 import Controller.Inventario.ElegirProductoController;
+import Controller.Inventario.ModificarProductoController;
 import Controller.Inventario.VerInventarioController;
 import Model.Facturar.DashboardFacturarModel;
 import Model.Facturas.FacturasModel;
@@ -20,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class OpenView {
@@ -75,9 +77,13 @@ public class OpenView {
         stage.show();
     }
 
-    public void ModificarProducto() throws Exception {
+    public void ModificarProducto(ArrayList<String> Producto) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.ModificarProducto));
         AnchorPane pane = loader.load();
+
+        ModificarProductoController controller = loader.getController();
+        controller.initialize(Producto);
+
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.ModificarProductoCSS)).toExternalForm());
@@ -106,6 +112,7 @@ public class OpenView {
         Stage stage = new Stage();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.VerInventarioCSS)).toExternalForm());
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
     }
 

@@ -96,7 +96,6 @@ public class VerInventarioModel {
 
     }
 
-
     public ArrayList<String> BuscarProducto() {
         ArrayList<String> Producto = new ArrayList<>();
 
@@ -148,7 +147,7 @@ public class VerInventarioModel {
     }
 
     public Inventario GetAllInventario() {
-        double valorTotal = 0.0;
+        BigDecimal valorTotal = BigDecimal.ZERO;
         int totalProductos;
         try (Connection connection = Conect.Conect();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM Inventario.Producto")
@@ -156,22 +155,34 @@ public class VerInventarioModel {
             ResultSet resultSet = statement.executeQuery();
             ArrayList<Item> Producto = new ArrayList<>();
             while (resultSet.next()) {
-                Producto.add(new Item(resultSet.getInt("IDProducto"), resultSet.getString("Nombre"), resultSet.getDouble("Cantidad"), resultSet.getDouble("Precio_Costo_USD"), resultSet.getDouble("Precio_Costo_BS"),(resultSet.getDouble("Cantidad") *resultSet.getDouble("Precio_Costo_BS"))));
+                // Usar BigDecimal para cálculos precisos
+                BigDecimal cantidad = BigDecimal.valueOf(resultSet.getDouble("Cantidad"));
+                BigDecimal precioCostoBS = BigDecimal.valueOf(resultSet.getDouble("Precio_Venta_BS"));
+                BigDecimal valorPorProducto = cantidad.multiply(precioCostoBS).setScale(2, RoundingMode.HALF_UP);
+
+                Producto.add(new Item(
+                        resultSet.getInt("IDProducto"),
+                        resultSet.getString("Nombre"),
+                        resultSet.getDouble("Cantidad"),
+                        resultSet.getDouble("Precio_Venta_USD"),
+                        resultSet.getDouble("Precio_Venta_BS"),
+                        valorPorProducto.doubleValue() // Convertir a double si es necesario
+                ));
+
+                // Sumar al valor total
+                valorTotal = valorTotal.add(valorPorProducto);
             }
             totalProductos = Producto.size();
-            for (Item item : Producto) {
-                BigDecimal valorPorProducto = BigDecimal.valueOf(item.getValorTotal()).setScale(2, RoundingMode.HALF_UP);
-                valorTotal += valorPorProducto.doubleValue();
-            }
 
-            BigDecimal ValorTotal = new BigDecimal(valorTotal).setScale(2, RoundingMode.HALF_UP);
+            // Asegurar que el valor total tenga 2 decimales
+            valorTotal = valorTotal.setScale(2, RoundingMode.HALF_UP);
 
-            return new Inventario(Producto, ValorTotal, totalProductos, LocalDate.now(), NombreUsuario);
+            return new Inventario(Producto, valorTotal, totalProductos, LocalDate.now(), NombreUsuario);
 
         } catch (RuntimeException | SQLException e) {
             throw new RuntimeException(e);
         }
-   }
+    }
 
 }
 

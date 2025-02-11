@@ -15,7 +15,7 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <TableView fx:id="TablaInventario" layoutX="95.0" layoutY="194.0" prefHeight="321.0" prefWidth="1210.0">
+      <TableView fx:id="TablaInventario" layoutX="95.0" layoutY="154.0" prefHeight="418.0" prefWidth="1210.0">
         <columns>
             <TableColumn fx:id="IDColumn" prefWidth="112.0" text="ID" />
           <TableColumn fx:id="NombreProductoColumn" prefWidth="242.0" text="Nombre del Producto" />
@@ -25,9 +25,10 @@
             <TableColumn fx:id="PrecioVentaBsColumn" minWidth="7.0" prefWidth="235.0" text="Precio de Venta BS" />
         </columns>
       </TableView>
-      <TextField fx:id="BuscarProductoTXT" layoutX="417.0" layoutY="101.0" prefHeight="53.0" prefWidth="566.0" />
-      <Button fx:id="BtnDescargar" layoutX="594.0" layoutY="569.0" mnemonicParsing="false" onAction="#DescargarInventario" prefHeight="53.0" prefWidth="211.0" text="Descargar Inventario" />
-      <Button fx:id="BtnEliminarProducto" layoutX="312.0" layoutY="569.0" mnemonicParsing="false" onAction="#EliminarProducto" prefHeight="53.0" prefWidth="211.0" text="Eliminar Producto" />
-      <Button fx:id="BtnModificarProducto" layoutX="878.0" layoutY="569.0" mnemonicParsing="false" onAction="#ModificarProducto" prefHeight="53.0" prefWidth="211.0" text="Modificar Producto" />
+      <TextField fx:id="BuscarProductoTXT" layoutX="417.0" layoutY="87.0" prefHeight="41.0" prefWidth="566.0" />
+      <Button fx:id="BtnDescargar" layoutX="983.0" layoutY="601.0" mnemonicParsing="false" onAction="#DescargarInventario" prefHeight="53.0" prefWidth="211.0" text="Descargar Inventario" />
+      <Button fx:id="BtnEliminarProducto" layoutX="460.0" layoutY="601.0" mnemonicParsing="false" onAction="#EliminarProducto" prefHeight="53.0" prefWidth="211.0" text="Eliminar Producto" />
+      <Button fx:id="BtnModificarProducto" layoutX="729.0" layoutY="601.0" mnemonicParsing="false" onAction="#ModificarProducto" prefHeight="53.0" prefWidth="211.0" text="Modificar Producto" />
+      <Button fx:id="BtnAgregarProducto" layoutX="180.0" layoutY="601.0" mnemonicParsing="false" onAction="#AgregarProducto" prefHeight="53.0" prefWidth="211.0" text="Agregar Producto" />
    </children>
 </AnchorPane>

@@ -40,6 +40,32 @@ public class ModificarProductoModel {
         }
     }
 
+    public ArrayList<String> BuscarProductoID (int ID) {
+        ArrayList<String> Producto = new ArrayList<>();
+
+        try (Connection connection = Conect.Conect();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Inventario.Producto WHERE IDProducto = ?")
+        ) {
+            statement.setInt(1,ID);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Producto.add(resultSet.getString("Nombre"));
+                Producto.add(resultSet.getString("Descripcion"));
+                Producto.add(resultSet.getString("Cantidad"));
+                Producto.add(resultSet.getString("Precio_Costo_USD"));
+                Producto.add(resultSet.getString("Precio_Costo_BS"));
+                Producto.add(resultSet.getString("Precio_Venta_USD"));
+                Producto.add(resultSet.getString("Precio_Venta_BS"));
+                Producto.add(resultSet.getString("IDProducto"));
+            }
+            return Producto;
+        } catch (RuntimeException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean ModificarProducto (String NombreProducto, String Descripcion, String Cantidad, String PrecioCostoUSD, String PrecioCostoBS, String PrecioVentaUSD, String PrecioVentaBS,String ID) {
             PrecioCostoBS = String.valueOf(Double.parseDouble(PrecioCostoUSD) * Price.getCurrency().bcv());
             PrecioVentaBS = String.valueOf(Double.parseDouble(PrecioVentaUSD) * Price.getCurrency().bcv());
