@@ -1,6 +1,7 @@
 package Model.Inventario;
 
 public class Producto {
+    private String ID;
     private String Nombre;
     private String Descripcion;
     private String Cantidad;
@@ -9,7 +10,8 @@ public class Producto {
     private String PrecioVentaUSD;
     private String PrecioVentaBS;
 
-    public Producto(String Nombre, String Descripcion, String Cantidad, String PrecioDeCostoUSD,String PrecioDeCostoBS,String PrecioVentaUSD, String PrecioVentaBS) {
+    public Producto(String Id,String Nombre, String Descripcion, String Cantidad, String PrecioDeCostoUSD,String PrecioDeCostoBS,String PrecioVentaUSD, String PrecioVentaBS) {
+        this.ID = Id;
         this.Nombre = Nombre;
         this.Descripcion = Descripcion;
         this.Cantidad = Cantidad;
@@ -17,6 +19,14 @@ public class Producto {
         this.PrecioDeCostoBS = PrecioDeCostoBS;
         this.PrecioVentaUSD = PrecioVentaUSD;
         this.PrecioVentaBS = PrecioVentaBS;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getNombre() {

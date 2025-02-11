@@ -45,6 +45,9 @@ public class ElegirProductoController {
     private TableColumn<Producto, String> PrecioVentaUSDColumn;
 
     @FXML
+    private TableColumn<Producto, String> IDColumn;
+
+    @FXML
     private TableView<Producto> TablaInventario;
 
     @FXML
@@ -89,9 +92,6 @@ public class ElegirProductoController {
             }
         });
 
-
-
-
         while (Double.parseDouble(Productos.get(4)) < Double.parseDouble(inputField.getText()) || (Double.parseDouble(inputField.getText()) < 0)) {
             alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Seleccionar Cantidad");
@@ -132,7 +132,7 @@ public class ElegirProductoController {
 
 
     private void KeyPressed() {
-        BuscarProductoTXT.addEventFilter(KeyEvent.KEY_RELEASED, event -> VerInventario.cargarInventarioTabla(NombreProductoColumn,DescripcionColumn,CantidadColumn,PrecioVentaUSDColumn,PrecioVentaBsColumn,TablaInventario,BuscarProductoTXT.getText()));
+        BuscarProductoTXT.addEventFilter(KeyEvent.KEY_RELEASED, event -> VerInventario.cargarInventarioTabla(NombreProductoColumn,DescripcionColumn,CantidadColumn,PrecioVentaUSDColumn,PrecioVentaBsColumn,TablaInventario,BuscarProductoTXT.getText(),IDColumn));
     }
 
     @FXML
@@ -140,7 +140,7 @@ public class ElegirProductoController {
         this.DashboardFacturarmodel = dashboardFacturarmodel;
         KeyPressed();
         Dolar.ActualizarDolar();
-        VerInventario.cargarInventarioTabla(NombreProductoColumn,DescripcionColumn,CantidadColumn,PrecioVentaUSDColumn,PrecioVentaBsColumn,TablaInventario);
+        VerInventario.cargarInventarioTabla(NombreProductoColumn,DescripcionColumn,CantidadColumn,PrecioVentaUSDColumn,PrecioVentaBsColumn,TablaInventario,IDColumn);
     }
 
 }

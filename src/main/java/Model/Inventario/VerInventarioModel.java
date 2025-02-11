@@ -24,8 +24,9 @@ public class VerInventarioModel {
         this.NombreUsuario = NombreUsuario;
     }
 
-    public void cargarInventarioTabla(TableColumn<Producto, String> NombreProducto, TableColumn<Producto, String> Descripcion, TableColumn<Producto, String> Cantidad, TableColumn<Producto, String> PrecioVentaUSD, TableColumn<Producto, String> PrecioVentaBS, TableView<Producto> TablaInventario) {
+    public void cargarInventarioTabla(TableColumn<Producto, String> NombreProducto, TableColumn<Producto, String> Descripcion, TableColumn<Producto, String> Cantidad, TableColumn<Producto, String> PrecioVentaUSD, TableColumn<Producto, String> PrecioVentaBS, TableView<Producto> TablaInventario, TableColumn<Producto, String> IDColumn) {
         // Configurar las columnas
+        IDColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
         NombreProducto.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
         Descripcion.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
         Cantidad.setCellValueFactory(new PropertyValueFactory<>("Cantidad"));
@@ -36,8 +37,9 @@ public class VerInventarioModel {
         CargarInventario(TablaInventario);
     }
 
-    public void cargarInventarioTabla(TableColumn<Producto, String> NombreProducto, TableColumn<Producto, String> Descripcion, TableColumn<Producto, String> Cantidad, TableColumn<Producto, String> PrecioVentaUSD, TableColumn<Producto, String> PrecioVentaBS, TableView<Producto> TablaInventario, String BuscarProductoTXT) {
+    public void cargarInventarioTabla(TableColumn<Producto, String> NombreProducto, TableColumn<Producto, String> Descripcion, TableColumn<Producto, String> Cantidad, TableColumn<Producto, String> PrecioVentaUSD, TableColumn<Producto, String> PrecioVentaBS, TableView<Producto> TablaInventario, String BuscarProductoTXT, TableColumn<Producto, String> IDColumn) {
         // Configurar las columnas
+        IDColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
         NombreProducto.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
         Descripcion.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
         Cantidad.setCellValueFactory(new PropertyValueFactory<>("Cantidad"));
@@ -52,16 +54,18 @@ public class VerInventarioModel {
         ArrayList<String> Product = BuscarProducto();
         ObservableList<Producto> datos = FXCollections.observableArrayList();
 
-        for (int i = 0; i < Product.size(); i += 7) {
+        for (int i = 0; i < Product.size(); i += 8) {
 
             Producto producto = new Producto(
-                    Product.get(i), // Nombre
-                    Product.get(i + 1),     // Descripcion
-                    Product.get(i + 2),     // Cantidad
-                    Product.get(i + 3),     // Precio de Costo USD
-                    Product.get(i + 4),     // Precio de Costo BS
-                    Product.get(i + 5),     // Precio de Venta USD
-                    Product.get(i + 6)   // Precio de Venta BS
+                    Product.get(i), // ID
+                    Product.get(i + 1), // Nombre
+                    Product.get(i + 2),     // Descripcion
+                    Product.get(i + 3),     // Cantidad
+                    Product.get(i + 4),     // Precio de Costo USD
+                    Product.get(i + 5),     // Precio de Costo BS
+                    Product.get(i + 6),     // Precio de Venta USD
+                    Product.get(i + 7)   // Precio de Venta BS
+
             );
             datos.add(producto);
         }
@@ -73,16 +77,17 @@ public class VerInventarioModel {
         ArrayList<String> Product = BuscarProducto(BuscarProductoTXT);
         ObservableList<Producto> datos = FXCollections.observableArrayList();
 
-        for (int i = 0; i < Product.size(); i += 7) {
+        for (int i = 0; i < Product.size(); i += 8) {
 
             Producto producto = new Producto(
-                    Product.get(i), // Nombre
-                    Product.get(i + 1),     // Descripcion
-                    Product.get(i + 2),     // Cantidad
-                    Product.get(i + 3),     // Precio de Costo USD
-                    Product.get(i + 4),     // Precio de Costo BS
-                    Product.get(i + 5),     // Precio de Venta USD
-                    Product.get(i + 6)   // Precio de Venta BS
+                    Product.get(i), // ID
+                    Product.get(i + 1), // Nombre
+                    Product.get(i + 2),     // Descripcion
+                    Product.get(i + 3),     // Cantidad
+                    Product.get(i + 4),     // Precio de Costo USD
+                    Product.get(i + 5),     // Precio de Costo BS
+                    Product.get(i + 6),     // Precio de Venta USD
+                    Product.get(i + 7)   // Precio de Venta BS
             );
             datos.add(producto);
         }
@@ -102,6 +107,7 @@ public class VerInventarioModel {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
+                Producto.add(resultSet.getString("IDProducto"));
                 Producto.add(resultSet.getString("Nombre"));
                 Producto.add(resultSet.getString("Descripcion"));
                 Producto.add(resultSet.getString("Cantidad"));
@@ -126,6 +132,7 @@ public class VerInventarioModel {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
+                Producto.add(resultSet.getString("IDProducto"));
                 Producto.add(resultSet.getString("Nombre"));
                 Producto.add(resultSet.getString("Descripcion"));
                 Producto.add(resultSet.getString("Cantidad"));

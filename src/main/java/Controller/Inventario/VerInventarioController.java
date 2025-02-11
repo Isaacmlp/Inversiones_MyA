@@ -20,9 +20,19 @@ public class VerInventarioController {
     User user;
     String NombreUsuario;
 
+    @FXML
+    private Button BtnEliminarProducto;
+
+    @FXML
+    private Button BtnModificarProducto;
+
 
     @FXML
     private Button BtnDescargar;
+
+    @FXML
+    private TableColumn<Producto, String> IDColumn;
+
 
     @FXML
     private TableColumn<Producto, String> CantidadColumn;
@@ -64,8 +74,18 @@ public class VerInventarioController {
         PDF.generarPDF(HTMl, FileChoose.EscojerRuta(BtnDescargar, String.valueOf(VerInventario.GetAllInventario().getFecha())));
     }
 
+    @FXML
+    void EliminarProducto() {
+
+    }
+
+    @FXML
+    void ModificarProducto() {
+
+    }
+
     private void KeyPressed() {
-        BuscarProductoTXT.addEventFilter(KeyEvent.KEY_RELEASED, event -> VerInventario.cargarInventarioTabla(NombreProductoColumn,DescripcionColumn,CantidadColumn,PrecioVentaUSDColumn,PrecioVentaBsColumn,TablaInventario,BuscarProductoTXT.getText()));
+        BuscarProductoTXT.addEventFilter(KeyEvent.KEY_RELEASED, event -> VerInventario.cargarInventarioTabla(NombreProductoColumn,DescripcionColumn,CantidadColumn,PrecioVentaUSDColumn,PrecioVentaBsColumn,TablaInventario,BuscarProductoTXT.getText(),IDColumn));
     }
 
     @FXML
@@ -73,7 +93,7 @@ public class VerInventarioController {
         this.user = user;
         KeyPressed();
         Dolar.ActualizarDolar();
-        VerInventario.cargarInventarioTabla(NombreProductoColumn,DescripcionColumn,CantidadColumn,PrecioVentaUSDColumn,PrecioVentaBsColumn,TablaInventario);
+        VerInventario.cargarInventarioTabla(NombreProductoColumn,DescripcionColumn,CantidadColumn,PrecioVentaUSDColumn,PrecioVentaBsColumn,TablaInventario, IDColumn);
     }
 
 }

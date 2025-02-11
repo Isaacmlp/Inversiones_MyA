@@ -10,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class FacturasModel {
     ConectBD Conect = new ConectBD();
@@ -23,7 +23,6 @@ public class FacturasModel {
     public void setIdFactura(int IDFactura) {
         this.idFactura = IDFactura;
     }
-
 
     public ArrayList<Factura> getFacturas() {
             String sql = "SELECT * FROM Ventas.Factura";
