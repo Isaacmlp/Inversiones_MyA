@@ -17,7 +17,7 @@ public class AddProductModel {
             double precioVentaUSD = (precioVentaBs / Price.getCurrency().bcv());
             double unidades = Double.parseDouble(Cantidad);
 
-            String SQL = "INSERT INTO Inventario.Producto VALUES (?,?,?,?,?,?,?)";
+            String SQL = "INSERT INTO Inventario.Producto VALUES (TRIM(?), ?, ?, ?, ?, ?, ?)";
             try (Connection connection = con.Conect();
                  PreparedStatement statement = connection.prepareStatement(SQL)) {
 

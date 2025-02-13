@@ -71,7 +71,7 @@ public class ModificarProductoModel {
             PrecioVentaBS = String.valueOf(Double.parseDouble(PrecioVentaUSD) * Price.getCurrency().bcv());
 
         try (Connection connection = Conect.Conect();
-             PreparedStatement statement = connection.prepareStatement("UPDATE Inventario.Producto SET Nombre = ?, Descripcion = ?, Cantidad = ?, Precio_Costo_USD = ?, Precio_Costo_BS = ?, Precio_Venta_USD = ?, Precio_Venta_BS = ? WHERE IDProducto = ?")
+             PreparedStatement statement = connection.prepareStatement("UPDATE Inventario.Producto SET Nombre = TRIM(?), Descripcion = ?, Cantidad = ?, Precio_Costo_USD = ?, Precio_Costo_BS = ?, Precio_Venta_USD = ?, Precio_Venta_BS = ? WHERE IDProducto = ?")
         ) {
             statement.setString(1,NombreProducto);
             statement.setString(2,Descripcion);

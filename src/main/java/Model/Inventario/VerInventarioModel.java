@@ -127,7 +127,7 @@ public class VerInventarioModel {
         try (Connection connection = Conect.Conect();
              PreparedStatement statement = connection.prepareStatement("SELECT * FROM Inventario.Producto WHERE Nombre LIKE ?")
         ) {
-            statement.setString(1, BuscarProductoTXT + "%");
+            statement.setString(1, "%" + BuscarProductoTXT + "%");
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
