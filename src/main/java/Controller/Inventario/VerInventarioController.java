@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import Model.FileChoose;
+import javafx.scene.layout.VBox;
+import org.xhtmlrenderer.css.style.derived.StringValue;
 
 import java.util.Optional;
 
@@ -22,6 +24,8 @@ public class VerInventarioController {
     OpenView Open = new OpenView();
     EliminarProductoModel Eliminar = new EliminarProductoModel();
     ModificarProductoModel Modificar = new ModificarProductoModel();
+
+    private String input;
 
     private boolean isAdmin() {
         return user.getRol().equals("Administrador") || user.getRol().equals("Supervisor");
@@ -142,24 +146,66 @@ public class VerInventarioController {
     @FXML
     void ModificarProducto() throws Exception {
         if (isAdmin()) {
-
             Producto producto = TablaInventario.getSelectionModel().getSelectedItem();
 
             if (producto == null) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Advertencia");
-                alert.setHeaderText(null);
-                alert.setContentText("Seleccione un producto para Modificar");
-                alert.showAndWait();
+                mostrarAlerta(Alert.AlertType.WARNING, "Advertencia", "Seleccione un producto para Modificar");
                 return;
             }
 
-            Modificar.BuscarProductoID(Integer.parseInt(producto.getID()));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Modificar Producto");
+            alert.setHeaderText("Qué quieres modificar?");
 
-            Open.ModificarProducto(Modificar.BuscarProductoID(Integer.parseInt(producto.getID())));
+            Button btnStock = new Button("Stock");
+            Button btnProducto = new Button("Producto");
+
+            VBox dialogPaneContent = new VBox();
+            dialogPaneContent.getChildren().addAll(btnStock, btnProducto);
+            alert.getDialogPane().setContent(dialogPaneContent);
+
+            btnStock.setOnAction(event -> {
+                Alert alertStock = new Alert(Alert.AlertType.CONFIRMATION);
+                alertStock.setTitle("Seleccionar Cantidad");
+                alertStock.setHeaderText("¿Cuántas unidades desea llevar?");
+
+                TextField inputField = new TextField();
+                inputField.setPromptText("Ingrese Cantidad");
+
+                VBox dialogPaneContentStock = new VBox();
+                dialogPaneContentStock.getChildren().add(inputField);
+                alertStock.getDialogPane().setContent(dialogPaneContentStock);
+
+                alertStock.showAndWait().ifPresent(response -> {
+                    if (response == ButtonType.OK) {
+                        String input = inputField.getText();
+                        try {
+                            int cantidad = Integer.parseInt(input);
+                            if (Modificar.modificarStock(String.valueOf(producto.getID()), input)) {
+                                mostrarAlerta(Alert.AlertType.INFORMATION, "Modificación Exitosa",
+                                        "La cantidad de " + producto.getNombre() + " se modificó con éxito.");
+                            }
+                        } catch (NumberFormatException e) {
+                            mostrarAlerta(Alert.AlertType.ERROR, "Error", "Ingrese un número válido.");
+                        }
+                    }
+                });
+            });
+
+            btnProducto.setOnAction(event -> {
+                try {
+                     Modificar.BuscarProductoID(Integer.parseInt(producto.getID()));
+                     Open.ModificarProducto(Modificar.BuscarProductoID(Integer.parseInt(producto.getID())));
+                } catch (Exception e) {
+                    mostrarAlerta(Alert.AlertType.ERROR, "Error", "Ocurrió un error al modificar el producto: " + e.getMessage());
+                }
+            });
+
+            alert.showAndWait();
         } else {
             mostrarAlerta(Alert.AlertType.ERROR, "Error", "No tiene permisos para modificar productos");
         }
+        VerInventario.cargarInventarioTabla(NombreProductoColumn,DescripcionColumn,CantidadColumn,PrecioVentaUSDColumn,PrecioVentaBsColumn,TablaInventario, IDColumn);
     }
 
 

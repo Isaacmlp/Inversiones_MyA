@@ -66,9 +66,9 @@ public class ModificarProductoModel {
         }
     }
 
-    public boolean ModificarProducto (String NombreProducto, String Descripcion, String Cantidad, String PrecioCostoUSD, String PrecioCostoBS, String PrecioVentaUSD, String PrecioVentaBS,String ID) {
-            PrecioCostoBS = String.valueOf(Double.parseDouble(PrecioCostoUSD) * Price.getCurrency().bcv());
-            PrecioVentaBS = String.valueOf(Double.parseDouble(PrecioVentaUSD) * Price.getCurrency().bcv());
+    public boolean ModificarProducto (String NombreProducto, String Descripcion, String Cantidad, String PrecioCostoBs, String PrecioVentaBS,String ID) {
+            String PrecioCostoUSD = String.valueOf(Double.parseDouble(PrecioCostoBs) / Price.getCurrency().bcv());
+            String PrecioVentaUSD = String.valueOf(Double.parseDouble(PrecioVentaBS) / Price.getCurrency().bcv());
 
         try (Connection connection = Conect.Conect();
              PreparedStatement statement = connection.prepareStatement("UPDATE Inventario.Producto SET Nombre = TRIM(?), Descripcion = ?, Cantidad = ?, Precio_Costo_USD = ?, Precio_Costo_BS = ?, Precio_Venta_USD = ?, Precio_Venta_BS = ? WHERE IDProducto = ?")
@@ -77,10 +77,23 @@ public class ModificarProductoModel {
             statement.setString(2,Descripcion);
             statement.setString(3,Cantidad);
             statement.setString(4,PrecioCostoUSD);
-            statement.setString(5,PrecioCostoBS);
+            statement.setString(5,PrecioCostoBs);
             statement.setString(6,PrecioVentaUSD);
             statement.setString(7,PrecioVentaBS);
             statement.setInt(8,Integer.parseInt(ID));
+            statement.executeUpdate();
+            return true;
+        } catch (RuntimeException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean modificarStock (String ID, String Cantidad) {
+        try (Connection connection = Conect.Conect();
+             PreparedStatement statement = connection.prepareStatement("UPDATE Inventario.Producto SET Cantidad = ? WHERE IDProducto = ?")
+        ) {
+            statement.setString(1,Cantidad);
+            statement.setInt(2,Integer.parseInt(ID));
             statement.executeUpdate();
             return true;
         } catch (RuntimeException | SQLException e) {

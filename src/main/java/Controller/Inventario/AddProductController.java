@@ -79,7 +79,7 @@ public class AddProductController {
     void CalcularPorcentaje(ActionEvent event) {
         if (event.getSource() == ComboPorcentaje) {
             switch (ComboPorcentaje.getValue()) {
-                case "5%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.05)));
+                case "5%"  -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.05)));
                 case "10%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.1)));
                 case "15%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.15)));
                 case "20%" -> txtPrecioVentaBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCostoBs.getText()) * 1.2)));
@@ -97,6 +97,9 @@ public class AddProductController {
     void CalcularIVA(ActionEvent event) {
         if (event.getSource() == ComboIVA) {
             if (ComboIVA.getValue().equals("Si")) {
+                String nombreProducto = txtNombreProducto.getText();
+                nombreProducto = nombreProducto.replace(" (E)", "");
+                txtNombreProducto.setText(nombreProducto);
                 TxtPrecioCostoBs.setText(String.format(Locale.US, "%.2f", (Double.parseDouble(TxtPrecioCosto.getText()) * 1.16 )));
             } else if (ComboIVA.getValue().equals("Excento")) {
                 txtNombreProducto.setText(txtNombreProducto.getText() + " (E)");
