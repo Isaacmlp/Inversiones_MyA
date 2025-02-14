@@ -180,7 +180,7 @@ public class VerInventarioController {
                     if (response == ButtonType.OK) {
                         String input = inputField.getText();
                         try {
-                            int cantidad = Integer.parseInt(input);
+                            double cantidad = Double.parseDouble(input);
                             if (Modificar.modificarStock(String.valueOf(producto.getID()), input)) {
                                 mostrarAlerta(Alert.AlertType.INFORMATION, "Modificación Exitosa",
                                         "La cantidad de " + producto.getNombre() + " se modificó con éxito.");
