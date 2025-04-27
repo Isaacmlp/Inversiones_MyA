@@ -1,6 +1,7 @@
 package Utils;
 
 import Controller.Cliente.DashboardClientesController;
+import Controller.Cliente.VerClientesController;
 import Controller.DashboardController;
 import Controller.Facturar.DashboardFacturarController;
 import Controller.Facturar.PagarController;
@@ -229,13 +230,18 @@ public class OpenView {
         stage.show();
     }
 
-    public void VerClientes() throws Exception {
+    public void VerClientes(User user) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.VerClientes));
         AnchorPane pane = loader.load();
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
+
+        VerClientesController verClientesController = loader.getController();
+        verClientesController.initialize(user);
+
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.VerClientesCSS)).toExternalForm());
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
     }
 

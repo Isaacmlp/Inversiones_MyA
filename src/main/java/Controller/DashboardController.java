@@ -26,7 +26,8 @@ public class DashboardController {
 
     @FXML
     void Clientes() throws Exception {
-        Open.DashboardClientes(user);
+        //Open.DashboardClientes(user);
+        Open.VerClientes(user);
     }
 
     @FXML

@@ -53,7 +53,7 @@ public class DashboardClientesController {
 
     @FXML
     void VerCliente() throws Exception {
-        Open.VerClientes();
+        Open.VerClientes(user);
     }
 
     @FXML
