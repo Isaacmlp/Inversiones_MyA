@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class AgregarClienteController {
     AgregarClienteModel model = new AgregarClienteModel();
@@ -62,6 +63,7 @@ public class AgregarClienteController {
             alert.setContentText("El cliente ha sido agregado");
             alert.showAndWait();
             CleanFields();
+            ((Stage) NombreTXT.getScene().getWindow()).close();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error!");

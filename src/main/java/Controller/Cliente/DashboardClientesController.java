@@ -41,7 +41,7 @@ public class DashboardClientesController {
     @FXML
     void ModificarCliente() throws Exception {
         if (isAdmin()) {
-            Open.ModificarClientes();
+           // Open.ModificarClientes();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");

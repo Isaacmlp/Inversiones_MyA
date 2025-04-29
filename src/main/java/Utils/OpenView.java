@@ -1,6 +1,7 @@
 package Utils;
 
 import Controller.Cliente.DashboardClientesController;
+import Controller.Cliente.ModificarClienteController;
 import Controller.Cliente.VerClientesController;
 import Controller.DashboardController;
 import Controller.Facturar.DashboardFacturarController;
@@ -200,11 +201,15 @@ public class OpenView {
         stage.show();
     }
 
-    public void ModificarClientes() throws Exception {
+    public void ModificarClientes(ArrayList<String> Clientes) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(Paths.ModificarClientes));
         AnchorPane pane = loader.load();
         Scene scene = new Scene(pane);
         Stage stage = new Stage();
+
+        ModificarClienteController controller = loader.getController();
+        controller.iniatialize(Clientes);
+
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(Paths.ModificarClientesCSS)).toExternalForm());
         stage.setScene(scene);
         stage.show();

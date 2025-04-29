@@ -73,7 +73,7 @@ public class DashboardController {
                 if (keyEvent.isControlDown() || keyEvent.isAltDown()) Open.DashboardMonedas();
                 break;
             case C:
-                if (keyEvent.isControlDown() || keyEvent.isAltDown()) Open.DashboardClientes(user);
+                if (keyEvent.isControlDown() || keyEvent.isAltDown()) Open.VerClientes(user);
                 break;
             case I:
                 if (keyEvent.isControlDown() || keyEvent.isAltDown()) Open.VerInventario(user);

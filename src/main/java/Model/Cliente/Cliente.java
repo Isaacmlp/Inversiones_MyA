@@ -7,14 +7,16 @@ public class Cliente {
     private String telefono;
     private String direccion;
     private String correo;
+    private String id;
 
-    public Cliente(String nombre, String apellido, String cedula, String telefono, String direccion, String correo) {
+    public Cliente(String nombre, String apellido, String cedula, String telefono, String direccion, String correo, String id) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.cedula = cedula;
         this.telefono = telefono;
         this.direccion = direccion;
         this.correo = correo;
+        this.id = id;
     }
 
     public String getNombreCliente() {
@@ -63,5 +65,13 @@ public class Cliente {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

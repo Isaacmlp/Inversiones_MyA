@@ -13,17 +13,18 @@ import java.util.ArrayList;
 public class ModificarClienteModel {
     ConectBD Conect = new ConectBD();
 
-    public boolean ModificarCliente(String nombre, String apellido, String cedula, String telefono, String direccion, String correo) {
-        String SQl = "UPDATE Clientes.Cliente SET Nombre = ?, Apellido = ?, Telefono = ?, Direccion = ?, Correo = ? WHERE Cedula = ?";
+    public boolean ModificarCliente(String nombre, String apellido, String cedula, String telefono, String direccion, String correo, String id) {
+        String SQl = "UPDATE Clientes.Cliente SET Nombre = ?, Apellido = ?, Cedula = ?, Telefono = ?, Direccion = ?, Correo = ? WHERE ID = ?";
 
         try (Connection conexion = Conect.Conect();
              PreparedStatement ps = conexion.prepareStatement(SQl)) {
             ps.setString(1, nombre);
             ps.setString(2, apellido);
-            ps.setString(3, telefono);
-            ps.setString(4, direccion);
-            ps.setString(5, correo);
-            ps.setString(6, cedula);
+            ps.setString(3, cedula);
+            ps.setString(4, telefono);
+            ps.setString(5, direccion);
+            ps.setString(6, correo);
+            ps.setString(7, id);
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
