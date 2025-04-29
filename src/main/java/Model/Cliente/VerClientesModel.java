@@ -100,7 +100,7 @@ public class VerClientesModel {
                 Clientes.add(resultSet.getString("NOMBRE"));
                 Clientes.add(resultSet.getString("APELLIDO"));
                 Clientes.add(resultSet.getString("CEDULA"));
-                Clientes.add(resultSet.getString("TELEFONO"));
+                Clientes.add("0" + resultSet.getString("TELEFONO"));
                 Clientes.add(resultSet.getString("DIRECCION"));
                 Clientes.add(resultSet.getString("CORREO"));
                 Clientes.add(resultSet.getString("ID"));
@@ -124,7 +124,7 @@ public class VerClientesModel {
                 Clientes.add(resultSet.getString("NOMBRE"));
                 Clientes.add(resultSet.getString("APELLIDO"));
                 Clientes.add(resultSet.getString("CEDULA"));
-                Clientes.add(resultSet.getString("TELEFONO"));
+                Clientes.add("0" + resultSet.getString("TELEFONO"));
                 Clientes.add(resultSet.getString("DIRECCION"));
                 Clientes.add(resultSet.getString("CORREO"));
                 Clientes.add(resultSet.getString("ID"));
