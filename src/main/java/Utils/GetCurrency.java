@@ -14,7 +14,7 @@ public class GetCurrency {
     double bcvPrice ;
 
     public CurrencyObject getCurrency() {
-        String apiUrl = "https://pydolarve.org/api/v1/dollar?page=alcambio";
+        String apiUrl = "https://dollar-api.thejm1133.workers.dev";
         HttpRequest request = HttpRequest
                 .newBuilder()
                 .uri(URI.create(apiUrl))
@@ -26,7 +26,7 @@ public class GetCurrency {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             // En caso de error, devolver valores predeterminados
-            return new CurrencyObject(57.30, 69.80);
+            return new CurrencyObject(0.0, 0.0);
         }
 
         boolean isResponseOK =
@@ -36,20 +36,20 @@ public class GetCurrency {
 
         if (!isResponseOK) {
             // En caso de respuesta no exitosa, devolver valores predeterminados
-            return new CurrencyObject(57.30, 69.80);
+            return new CurrencyObject(0.0, 0.0);
         }
 
         final String body = response.body();
 
         JSONObject bodyJSON = new JSONObject(body);
 
-        JSONObject monitors = bodyJSON.getJSONObject("monitors"); // -> Monitores (BCV, EnParaleloVzla)
+        JSONObject bcvCurrency = bodyJSON.getJSONObject("bcv"); // -> Monitores (BCV, EnParaleloVzla)
 
-        JSONObject bcv = monitors.getJSONObject("bcv");
-        JSONObject paralelo = monitors.getJSONObject("enparalelovzla");
+        //JSONObject bcv = bcvCurrency.getJSONObject("baseValue");
+        //JSONObject paralelo = bcvCurrency.getJSONObject("enparalelovzla");
 
-        paraleloPrice = paralelo.getDouble("price");
-        bcvPrice = bcv.getDouble("price");
+        paraleloPrice = 0.0;
+        bcvPrice = Double.parseDouble(String.valueOf(bcvCurrency.getBigDecimal("baseValue")));
 
         return new CurrencyObject(bcvPrice, paraleloPrice);
     }
