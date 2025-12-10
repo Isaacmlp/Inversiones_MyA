@@ -7,14 +7,16 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.io.IOException;
 import java.net.URI;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class GetCurrency {
     private final HttpClient client = HttpClient.newHttpClient();
     double paraleloPrice ;
     double bcvPrice ;
+    Dotenv dotenv = Dotenv.load();
 
     public CurrencyObject getCurrency() {
-        String apiUrl = "https://dollar-api.thejm1133.workers.dev";
+        String apiUrl = dotenv.get("API");
         HttpRequest request = HttpRequest
                 .newBuilder()
                 .uri(URI.create(apiUrl))
